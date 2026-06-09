@@ -1,0 +1,50 @@
+id: design-workshop
+name: Design a workshop from a brief
+persona: facilitator
+job: design-grounded-agenda
+medium_aware: true   # same flow; medium influences which structures fit
+
+mental_model:
+  - "I have a goal, an audience, a time box, and a medium. I want an agenda of structures that fit."
+  - "I trust suggestions that cite a real practice and explain why it fits here."
+  - "I will edit the output — it's a starting draft I own, not a locked template."
+
+happy_path:
+  - step: capture-brief
+    action: I write a short brief (goal, audience, group size, duration, medium, constraints) as markdown.
+    output: workshops/<slug>/brief.md
+    emotion: focused
+  - step: invoke-designer
+    action: I ask the designer agent to design the workshop.
+    output: designer reads brief + practices library (+ lessons, later)
+    emotion: hopeful
+  - step: review-design
+    action: I read the proposed timed agenda — named structures, timings, rationale, citations.
+    output: workshops/<slug>/design.md
+    emotion: confident (this looks like something I'd run)
+  - step: iterate
+    action: I tweak the brief or ask for an alternative structure; designer revises.
+    output: updated design.md
+    emotion: in-control
+  - step: commit
+    action: I keep the design; it lives in the workshop folder, ready to run / prep.
+    output: design.md (final)
+    emotion: prepared
+
+shared_artifacts:
+  - name: brief.md
+    source: facilitator (written by hand from a template)
+  - name: practices library
+    source: practices/ markdown (seeded LS + TBR); single source of truth for structures
+  - name: design.md
+    source: designer agent (only writer); facilitator edits thereafter
+
+error_paths:
+  - when: brief is missing key inputs (no duration or goal)
+    recovery: designer asks for the missing field before designing, or states its assumption explicitly.
+  - when: no library practice fits the goal/medium
+    recovery: designer says so plainly and proposes the closest fit + flags a library gap to add later.
+  - when: total structure timings exceed the time box
+    recovery: designer flags the overflow and offers a trimmed agenda.
+
+emotional_arc: focused -> hopeful -> confident -> in-control -> prepared   # upward

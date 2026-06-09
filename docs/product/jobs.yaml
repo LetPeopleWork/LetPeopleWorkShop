@@ -1,0 +1,72 @@
+# Jobs-to-be-Done — Facilitation Hub
+# Opportunity score = importance (1-5) + (importance - satisfaction), higher = stronger opportunity.
+# Lightweight discovery (single primary user); scores are the facilitator's own ratings.
+
+jobs:
+  - id: design-grounded-agenda
+    primary: true
+    persona: facilitator
+    story: >
+      When I'm asked to facilitate a workshop and I have a rough goal, audience, time box, and
+      medium, I want to shape a well-structured, timed agenda grounded in proven facilitation
+      practices, so I can walk in confident it will achieve its outcome and keep people engaged.
+    dimensions:
+      functional: Produce a timed agenda of named structures matched to goal, group size, duration, and medium — with rationale.
+      emotional: Feel prepared and confident instead of winging it; lower pre-workshop anxiety.
+      social: Be seen as an intentional, skilled facilitator with credible, methodical designs.
+    forces:
+      push: Blank-page design is slow; I forget good structures; designs aren't grounded in a consistent method.
+      pull: A curated practices library + an assistant that proposes structures, timings, and rationale, and learns from my past sessions.
+      anxiety: Suggestions might be generic or wrong for my context; fear of rigid templates; effort to seed the library.
+      habit: Today I improvise from memory and scattered docs; I'd have to start from a structured brief.
+    importance: 5
+    satisfaction: 2
+    opportunity_score: 8   # 5 + (5-2)
+    feature: workshop-designer
+
+  # ---- Secondary jobs (backlog; not built in the first feature) ----
+  - id: learn-from-sessions
+    primary: false
+    persona: facilitator
+    story: >
+      When a session ends, I want to debrief what worked and what didn't into reusable lessons,
+      so my next design starts smarter than the last.
+    importance: 4
+    satisfaction: 1
+    opportunity_score: 7
+    feature: feedback-capture
+
+  - id: reuse-lessons-in-design
+    primary: false
+    persona: facilitator
+    story: >
+      When I design a new workshop, I want the designer to surface relevant lessons from my past
+      sessions, so I stop repeating mistakes and reuse what landed.
+    importance: 4
+    satisfaction: 1
+    opportunity_score: 7
+    feature: lessons-loop
+    depends_on: [design-grounded-agenda, learn-from-sessions]
+
+  - id: prep-the-room
+    primary: false
+    persona: facilitator
+    story: >
+      When a design is agreed, I want a concrete setup pack for the medium (room layout, or a Miro
+      board structure, or a video-call breakout plan) plus materials and a facilitator script,
+      so I can prep fast and run smoothly.
+    importance: 4
+    satisfaction: 2
+    opportunity_score: 6
+    feature: executor
+
+  - id: grow-practice-library
+    primary: false
+    persona: facilitator
+    story: >
+      When I learn a new facilitation practice, I want to add it to my library as markdown without
+      touching code, so the assistant can use it immediately.
+    importance: 3
+    satisfaction: 2
+    opportunity_score: 4
+    feature: library-extensibility

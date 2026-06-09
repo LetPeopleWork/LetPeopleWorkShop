@@ -1,0 +1,32 @@
+id: facilitator
+name: The Facilitator (primary user — me)
+type: primary
+one_liner: A practicing workshop facilitator who designs and runs sessions for teams and clients.
+
+goals:
+  - Walk into every session confident the design will achieve its outcome.
+  - Reuse hard-won facilitation structures instead of reinventing them each time.
+  - Get measurably better by capturing and feeding back what worked.
+
+frustrations:
+  - Designing from a blank page each time is slow.
+  - Good structures I've used live in my head and scattered docs; I forget them.
+  - I rarely debrief rigorously, so lessons evaporate.
+
+mental_model:
+  - Thinks in terms of "structures" / "activities" with a purpose, timing, and group configuration.
+  - Familiar vocabulary: agenda, time box, breakout, debrief, energy, outcome, parking lot.
+  - Knows Liberating Structures and Training from the BACK of the Room by name.
+
+vocabulary:
+  brief: The raw inputs for a session — goal, audience, group size, duration, medium, constraints.
+  structure: A named facilitation method (e.g. 1-2-4-All, Impromptu Networking).
+  design: A timed agenda composed of structures with rationale.
+  medium: Where it runs — in-person room, Miro/Mural, or video call.
+  lessons: What I learned from running a session, reusable next time.
+
+secondary_personas:
+  - id: participant
+    note: Attends the workshop; experiences engagement/clarity. Not a direct tool user.
+  - id: client
+    note: Commissions the session; judges outcomes and my credibility. Not a direct tool user.

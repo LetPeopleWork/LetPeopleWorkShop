@@ -1,0 +1,19 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# PRIVATE FACILITATION CONTENT — never commit real sessions or learnings.
+# The toolkit (practices/, templates/, agents, docs) is public and reusable.
+# Your actual workshop designs, feedback, and lessons stay on your machine.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# Ignore every real workshop folder…
+/workshops/*
+# …but keep the committed, sanitized example(s) that show newcomers the shape:
+!/workshops/EXAMPLE-*/
+
+# Ignore your aggregated lessons-learned…
+/lessons-learned/*
+# …but keep its explainer so the folder exists in a fresh clone:
+!/lessons-learned/README.md
+
+# Editor / OS noise
+.DS_Store
+*.swp
