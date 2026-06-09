@@ -1,14 +1,22 @@
 name: Plugin Release
 
-# build/test the generated plugin on every push & PR; publish to the marketplace only on a
-# version tag (v*), and only after manual approval via the `marketplace` environment.
+# - Every push to main / PR: build + test the generated plugin (CI).
+# - Release: trigger "Run workflow" (workflow_dispatch). The version is computed automatically
+#   (next semver from the latest tag; first release -> 1.0.0). The publish job is gated by the
+#   `marketplace` environment (manual approval), then pushes the plugin to the `release` branch
+#   and tags the release. No manual version numbers.
 
 on:
   push:
     branches: [main]
-    tags: ["v*"]
   pull_request:
   workflow_dispatch:
+    inputs:
+      bump:
+        description: "Version bump for this release"
+        type: choice
+        options: [patch, minor, major]
+        default: minor
 
 permissions:
   contents: write
@@ -17,12 +25,24 @@ jobs:
   build:
     name: Build & test plugin
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.ver.outputs.version }}
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0          # full history so the build can derive the version from tags
+          fetch-depth: 0                # full history so version can be derived from tags
+      - name: Compute version
+        id: ver
+        run: |
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then
+            v="$(bash scripts/next-version.sh "${{ inputs.bump }}")"
+          else
+            v="$(git describe --tags --match 'v*' --abbrev=0 2>/dev/null | sed 's/^v//' || echo 0.0.0)-dev"
+          fi
+          echo "version=$v" >> "$GITHUB_OUTPUT"
+          echo "→ version: $v"
       - name: Generate + validate the plugin
-        run: bash scripts/build-plugin.sh
+        run: bash scripts/build-plugin.sh "${{ steps.ver.outputs.version }}"
       - name: Upload built plugin
         uses: actions/upload-artifact@v4
         with:
@@ -33,14 +53,27 @@ jobs:
   publish:
     name: Publish to marketplace
     needs: build
-    if: startsWith(github.ref, 'refs/tags/v')   # only on version tags
+    if: github.event_name == 'workflow_dispatch'   # release only on manual trigger
     runs-on: ubuntu-latest
-    environment: marketplace                      # <-- manual-approval gate (configure required reviewers in repo settings)
+    environment: marketplace                        # manual-approval gate (required reviewer)
+    env:
+      VERSION: ${{ needs.build.outputs.version }}
     steps:
       - uses: actions/checkout@v4
-      - name: Rebuild plugin at this tag
-        run: bash scripts/build-plugin.sh "${GITHUB_REF_NAME#v}"
-      - name: Push plugin to the `release` branch (marketplace source)
+        with:
+          fetch-depth: 0
+      - name: Rebuild plugin at the release version
+        run: bash scripts/build-plugin.sh "$VERSION"
+      - name: Publish to the `release` branch (marketplace source)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash scripts/publish-plugin.sh
+      - name: Tag the release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git tag -a "v$VERSION" -m "Release v$VERSION"
+          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "v$VERSION"
+          echo "✓ tagged v$VERSION"
