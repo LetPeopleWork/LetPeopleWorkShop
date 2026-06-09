@@ -8,13 +8,21 @@ from it). The repository *is* the tool — there's no app to install.
 
 ## What's here
 ```
-practices/        Facilitation structures, one markdown file each (the grounding library). PUBLIC.
+.claude/                              THE TOOLKIT (reusable; this is the future plugin payload). PUBLIC.
+  agents/designer.md                  The `designer` subagent.
+  skills/facilitation-practices/      The practices library, as a Skill (list/explain/recommend/ground).
+    practices/*.md                    Facilitation structures, one markdown file each.
 templates/        brief.md + design.md formats to copy. PUBLIC.
-.claude/agents/   The `designer` subagent. PUBLIC.
 workshops/        Your sessions: brief → design (→ feedback → lessons). PRIVATE (gitignored, except EXAMPLE-*).
 lessons-learned/  Aggregated reusable lessons. PRIVATE (gitignored).
 docs/             Product vision, jobs, journeys, feature specs. PUBLIC.
 ```
+
+### Toolkit vs. content (built for a clean future plugin)
+The whole reusable tool lives under **`.claude/`** — which already mirrors a Claude Code *plugin*
+layout (`agents/`, `skills/`). Your *content* (`workshops/`, `lessons-learned/`) lives at the root and
+is gitignored. So distribution can be **either**: fork this repo (works today), **or** later wrap
+`.claude/` in a `.claude-plugin/plugin.json` and publish it to a marketplace — a lift, not a rewrite.
 
 ## Public toolkit vs. your private content
 This repo is meant to be pushed **publicly** so other facilitators can use it — but **your real
@@ -30,9 +38,10 @@ sessions stay yours.
 4. See `workshops/EXAMPLE-team-retro/` for a worked example.
 
 ## Add a facilitation practice
-Copy `practices/_TEMPLATE.md` to a new kebab-case file, fill it in. The designer picks it up
-automatically — no code change. Seeded with [Liberating Structures](https://www.liberatingstructures.com/)
-and [Training from the BACK of the Room](https://bowperson.com/resources/index.html); add more anytime.
+Copy `.claude/skills/facilitation-practices/practices/_TEMPLATE.md` to a new kebab-case file, fill it
+in. The `facilitation-practices` skill and the `designer` pick it up automatically — no code change.
+Seeded with [Liberating Structures](https://www.liberatingstructures.com/) and
+[Training from the BACK of the Room](https://bowperson.com/resources/index.html); add more anytime.
 
 ## Roadmap
 Designer → Feedback capture → Lessons loop (designer learns from past sessions) → Executor (room / Miro /

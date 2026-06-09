@@ -10,10 +10,10 @@ Feature: Brief becomes a grounded, runnable design
 
   Scenario: Designer turns a brief into a grounded, time-reconciled design
     Given a brief.md with a goal, audience, group size, duration, medium, and sensitivities
-    And a practices/ library of facilitation structures
+    And the facilitation-practices skill library of structures (.claude/skills/facilitation-practices/practices/)
     When I run the `designer` agent on the brief
     Then a design.md is written next to the brief
-    And every structure in the agenda cites a practice file that exists in practices/
+    And every structure in the agenda cites a practice by slug that resolves to a file in the library
     And the agenda total is reconciled against the brief's time box with trim/expand variants
     And the design honors the brief's sensitivities (e.g. does not lead with the convener's solution)
     And a missing brief field is asked about or stated as an explicit assumption — never silently invented

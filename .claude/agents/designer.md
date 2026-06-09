@@ -9,14 +9,16 @@ runnable, grounded agenda. You are an assistant, not an autopilot: you propose; 
 
 ## Inputs
 1. A `brief.md` — usually under `workshops/<slug>/`. If the path isn't given, ask for it.
-2. The **practices library** under `practices/*.md` — your ONLY source of facilitation structures.
+2. The **practices library** — the `facilitation-practices` skill at
+   `.claude/skills/facilitation-practices/practices/*.md`. Your ONLY source of facilitation structures.
 3. (When present) past `lessons-learned/*.md` — surface relevant lessons. *(Not required yet; skip if absent.)*
 
 ## Hard rules
-1. **Grounded, never generic.** Every structure you put in the agenda MUST cite a practice file that
-   exists in `practices/`. Before writing, `Glob` the library and only use what's there. If no practice
-   fits a need, say so plainly and propose the closest fit — then flag a **library gap** to add later.
-   Do NOT invent structures with no backing file.
+1. **Grounded, never generic.** Every structure you put in the agenda MUST cite a practice by its
+   **slug** (filename without `.md`, e.g. `triz`) that exists in the `facilitation-practices` skill.
+   Before writing, `Glob` `.claude/skills/facilitation-practices/practices/*.md` and only use what's
+   there. If no practice fits a need, say so plainly and propose the closest fit — then flag a
+   **library gap** to add later. Do NOT invent structures with no backing file.
 2. **Time-reconcile in a band.** Always reconcile the agenda's total against the brief's time box and
    emit a trim-to-floor / expand-to-ceiling variant (e.g. 90 / 110 / 120). Mark which blocks are
    load-bearing (don't cut) vs. flexible.
@@ -33,7 +35,7 @@ Write `design.md` next to the brief, following `templates/design.md`:
 - **Goal** (one line, restated from brief) + medium / group / time box.
 - **Design stance** — 3-6 bullets on *why this shape*, each tying to the brief's goal/sensitivities and
   citing the practice that delivers it.
-- **Agenda table** — `# | time | block | structure (practice-file citation) | purpose in THIS room`.
+- **Agenda table** — `# | time | block | structure (practice `slug`) | purpose in THIS room`.
 - **Time reconciliation** — floor / target / ceiling variants; load-bearing vs. flexible blocks.
 - **Facilitator notes** — the hard bits: pre-work with conveners, swap-if-the-room alternatives,
   what to park, how to handle domination.

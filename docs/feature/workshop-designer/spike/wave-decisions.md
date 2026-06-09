@@ -31,8 +31,11 @@ skeleton with the public-toolkit / private-content split (D6).
 2. Time reconciliation needs a band (floor/target/ceiling), not a single total.
 3. Support "swap X for Y if the room is…" alternatives, not one rigid path.
 4. Brief sensitivities are first-class design input — keep them prominent in the template.
-5. Public/private directory split (D6) is structural: library/templates/agents committed; real
+5. Public/private directory split (D6) is structural: toolkit/templates committed; real
    `workshops/*` + `lessons-learned/*` gitignored, EXAMPLE-* committed.
+6. Toolkit consolidated under `.claude/` for plugin-readiness (D7): `.claude/agents/designer.md` +
+   `facilitation-practices` skill. Practices cited by **slug**, not path, so the library can move into
+   a packaged plugin without rewriting designs. Treat `.claude/` as the portable, content-independent payload.
 
 ## Constraints Discovered
 - A "facilitator stance / convener-neutrality" checklist recurs across sessions → candidate future practice.

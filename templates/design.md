@@ -3,15 +3,18 @@
 **Goal:** <one line from the brief> · **Medium:** <…> · **Group:** <…> · **Time box:** <…> · **This design:** <~total>
 
 ## Design stance (why this shape)
-- <why decision 1> → grounded in `practices/<file>`.
-- <why decision 2> → `practices/<file>`.
+- <why decision 1> → grounded in practice `<slug>`.
+- <why decision 2> → `<slug>`.
 - <… 3-6 bullets, each tied to the brief's goal/sensitivities and a practice>
 
 ## Agenda (≈<total> min)
 | # | Time | Block | Structure (practice) | Purpose in this room |
 |---|------|-------|----------------------|----------------------|
-| 1 | <m> | <block> | <Name> (`practices/<file>`) | <why here, in this room> |
+| 1 | <m> | <block> | <Name> (`<slug>`) | <why here, in this room> |
 | … |     |        |                      |                      |
+
+<!-- Cite practices by slug (filename without .md), e.g. `triz`, `1-2-4-all`. The slug must resolve
+     to a practice in the facilitation-practices skill. Do not hardcode file paths here. -->
 
 **Total: <n> min** — within the <floor>-<ceiling> box.
 

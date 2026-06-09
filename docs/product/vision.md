@@ -15,8 +15,10 @@ commission the sessions. Tertiary: other facilitators who adopt the toolkit.
 ## Public toolkit vs. private content (key constraint)
 The repository is pushed **publicly** so others can use it, but **my designs, feedback, and lessons
 must never be committed.**
-- **Public (committed):** `practices/` library, agents + skills, `templates/` (brief + design
-  formats), `README`, `docs/`, and one sanitized `workshops/EXAMPLE-*/` sample showing the shape.
+- **Public (committed):** the toolkit under `.claude/` (the `designer` agent + the
+  `facilitation-practices` skill/library), `templates/` (brief + design formats), `README`, `docs/`,
+  and one sanitized `workshops/EXAMPLE-*/` sample showing the shape. `.claude/` mirrors a Claude Code
+  plugin layout, so it can later be packaged and published to a marketplace without a rewrite.
 - **Private (gitignored):** every real `workshops/<slug>/` (brief → design → feedback) and the
   aggregated `lessons-learned/`. A self-documenting `.gitignore` keeps a fork from accidentally
   committing private sessions.

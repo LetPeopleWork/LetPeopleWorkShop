@@ -1,5 +1,7 @@
 # SPIKE Findings — workshop-designer
 
+> **Promoted on 2026-06-09** into the walking skeleton (commit `feat(workshop-designer): walking skeleton`). Probe dir deleted.
+
 ## Assumption tested
 A *thin* curated library of Liberating Structures + Training-from-the-BACK-of-the-Room practices,
 fed to a designer, can ground a complete, time-reconciled, **runnable** workshop design from a real
