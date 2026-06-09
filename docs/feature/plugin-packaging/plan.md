@@ -46,9 +46,38 @@ files everywhere. For local hacking, run `claude --plugin-dir .` (which sets `${
   you install the plugin. ❌ This repo stops working as a plain `.claude/` project (dev = `--plugin-dir .` or
   install); your current in-repo `workshops/cross-team-collab-s1/` would move to that private workspace.
 
-**Recommendation: Option B**, because the whole product thesis is "public toolkit, private content kept
-separate" — plugin-first makes that literal. The one-time cost is migrating your existing private workshops
-out of this repo into a personal workspace (they're gitignored, so it's a move, not a loss).
+**Option C — generator action (recommended).** Keep `main` exactly as it is (clone-and-use via `.claude/`
+with relative paths). Add a **build script** (`scripts/build-plugin.sh`) that *generates* the plugin form
+from `main`: copies `.claude/agents/`→`agents/`, `.claude/skills/`→`skills/`, `templates/`→`templates/`,
+**rewrites toolkit paths to `${CLAUDE_PLUGIN_ROOT}`**, and emits `.claude-plugin/plugin.json`. A thin
+**GitHub Action** runs it on a release tag and publishes the built tree (a `release` branch or release
+asset) that the marketplace points at.
+- ✅ Single source of truth (`main`/`.claude/`); clone-and-use untouched; plugin auto-generated — both
+  audiences, no hand-maintained second layout. ✅ Re-deriving from `main` removes the "moving target" risk —
+  build anytime, bump the version. ❌ A small path-rewrite transform to keep correct (few, well-defined refs;
+  guarded by a CI structural check). ❌ CI validates *structure* but can't fully *run* agents (needs model
+  access) — smoke-test locally with `claude --plugin-dir ./build` before tagging.
+
+**Recommendation: Option C.** It dominates A (no second layout to maintain by hand) and B (keeps the
+easy clone-and-use). A and B remain documented as manual fallbacks. The clone-mode repo stays your single
+source of truth; the plugin is a *generated artifact*.
+
+### Generator design (Option C)
+- **Source → output transform** (`scripts/build-plugin.sh`, output `./build/plugin/`):
+  - `.claude/agents/*.md` → `build/plugin/agents/*.md`
+  - `.claude/skills/facilitation-practices/` → `build/plugin/skills/facilitation-practices/`
+  - `templates/*.md` → `build/plugin/templates/*.md`
+  - write `build/plugin/.claude-plugin/plugin.json` (version from the git tag)
+- **Path rewrite** (toolkit only — see the Phase-2 inventory table): in the *copied* agents + SKILL,
+  `\.claude/skills/facilitation-practices/practices/` → `${CLAUDE_PLUGIN_ROOT}/skills/facilitation-practices/practices/`
+  and `templates/<x>.md` → `${CLAUDE_PLUGIN_ROOT}/templates/<x>.md`. Leave `workshops/…` and
+  `lessons-learned/…` untouched (project-relative in both modes).
+- **CI guard:** after building, assert (a) `plugin.json` is valid JSON with required fields, (b) expected
+  agents/skills/templates present, (c) **no relative toolkit path leaked** — `grep` the built agents for
+  `.claude/skills/` or a bare `templates/` toolkit ref and fail if found.
+- **Publish:** GitHub Action on `v*` tag → run build → push `build/plugin/` to the `release` branch (or
+  attach as a release asset). `.claude-plugin/marketplace.json` on `main` lists the plugin with
+  `source: {github, repo: LetPeopleWork/LetPeopleWorkShop, ref: release}` (exact wiring confirmed in the spike).
 
 ## Recommended approach: SPIKE first (de-risk before migrating)
 Consistent with how we built everything else — validate the riskiest unknown cheaply before the full move.
@@ -121,8 +150,9 @@ Consistent with how we built everything else — validate the riskiest unknown c
   maintenance for a workflow `--plugin-dir` already covers.
 
 ## Open decisions for you
-1. **Option A vs B** (recommend **B**, plugin-first).
+1. **Option A / B / C** (recommend **C — the generator action**: single source of truth + clone-and-use + an
+   auto-generated plugin).
 2. **Plugin name**: `let-people-workshop` (kebab; skill becomes `/let-people-workshop:facilitation-practices`) — ok?
-3. **Do it now, or after you've run the cross-team session** and dogfooded the loop once? (Recommend: dogfood first,
-   then package — packaging a settled toolkit beats packaging a moving one, same logic as ADR-001's "defer until
-   the shape settles".)
+3. **When**: with Option C the **generator can be built anytime** (it re-derives from `main`, so no "moving target"
+   risk) — but **cutting the `v1.0.0` marketplace release** is still best *after* you've dogfooded the cross-team
+   session, so v1 reflects a toolkit proven on a real workshop. So: build the generator whenever; publish v1 post-session.
