@@ -31,6 +31,15 @@ jobs:
     story: >
       When a session ends, I want to debrief what worked and what didn't into reusable lessons,
       so my next design starts smarter than the last.
+    dimensions:
+      functional: Turn a post-session brain-dump into a structured feedback record + extract tagged, reusable lessons.
+      emotional: Relief that the insight isn't lost; closure after a session; a sense my effort compounds.
+      social: Be a reflective practitioner who visibly improves session over session.
+    forces:
+      push: I rarely debrief; when tired I move straight to the next thing and the lessons evaporate.
+      pull: A low-friction debrief that does the structuring for me and tags lessons so they resurface later.
+      anxiety: Will it be busywork? Will tagging feel tedious? Will I actually do it when drained?
+      habit: Today nothing is captured; reflection (if any) lives in my head and fades.
     importance: 4
     satisfaction: 1
     opportunity_score: 7

@@ -1,0 +1,53 @@
+id: debrief-session
+name: Debrief a session into structured feedback + reusable lessons
+persona: facilitator
+job: learn-from-sessions
+
+mental_model:
+  - "The session just happened. I'm tired. I have impressions, not a report."
+  - "I want to dump what's in my head and have it organized for me — not fill a form."
+  - "A lesson is only worth capturing if future-me (or the designer) can find it again."
+
+happy_path:
+  - step: invoke-feedback
+    action: After a session I point the feedback agent at the workshop folder.
+    output: agent reads design.md for context (what was planned, which structures ran)
+    emotion: drained
+  - step: brain-dump
+    action: I talk/type a messy stream — what worked, what flopped, what surprised me.
+    output: raw dump captured
+    emotion: unburdening
+  - step: agent-structures
+    action: Agent organizes the dump into feedback.md sections and asks only the gaps it needs.
+    output: workshops/<slug>/feedback.md (structured; sections skippable)
+    emotion: relieved (low friction)
+  - step: overall-rating
+    action: I give the session an overall rating.
+    output: rating captured in feedback.md frontmatter
+    emotion: reflective
+  - step: extract-lessons
+    action: Agent proposes reusable lessons, tagged by practice slug + theme; I confirm/trim.
+    output: lessons-learned/ entries (tagged), brief status → run
+    emotion: satisfied (it compounds)
+
+shared_artifacts:
+  - name: design.md
+    source: designer agent (read here for context — planned structures, time band)
+  - name: feedback.md
+    source: feedback agent (only writer); facilitator edits thereafter
+  - name: lessons-learned entries
+    source: feedback agent (created/appended), tagged by slug + theme
+  - name: brief.md status
+    source: feedback agent advances designed → run
+
+error_paths:
+  - when: no design.md (ad-hoc session not designed in the hub)
+    recovery: capture feedback from the brain-dump alone; agent asks which structures were used so lessons can still be slug-tagged.
+  - when: a lesson has no clear practice it applies to
+    recovery: tag it by theme only (slug optional); never force a slug.
+  - when: brain-dump is sparse
+    recovery: agent asks the few highest-value gap questions (what would you change? overall rating?) — keeps it short.
+  - when: I don't want a lesson from this session
+    recovery: feedback.md can stand alone; lessons extraction is offered, never mandatory.
+
+emotional_arc: drained -> unburdening -> relieved -> reflective -> satisfied   # upward
