@@ -61,13 +61,22 @@ jobs:
     primary: false
     persona: facilitator
     story: >
-      When a design is agreed, I want a concrete setup pack for the medium (room layout, or a Miro
-      board structure, or a video-call breakout plan) plus materials and a facilitator script,
-      so I can prep fast and run smoothly.
+      When a design is agreed, I want a concrete setup pack for the medium — a materials/setup
+      checklist plus the per-structure prep steps — so I can prep fast and walk in with nothing forgotten.
+    dimensions:
+      functional: Turn an agreed design into a per-structure setup checklist + materials list for the medium (in-person or digital).
+      emotional: Walk in calm and ready; no last-minute scramble; trust that nothing is missing.
+      social: Appear organized and professional; the session runs smoothly from the first minute.
+    forces:
+      push: Prepping from the agenda each time is manual; I forget materials; per-structure needs live in my head.
+      pull: A checklist + per-structure setup generated straight from my design, for the right medium.
+      anxiety: Will it be generic or miss my context? Will digital prep actually match how Miro/video work?
+      habit: Today I improvise prep from the agenda and occasionally forget something on the day.
     importance: 4
     satisfaction: 2
     opportunity_score: 6
     feature: executor
+    # Medium model: executor maps brief medium → prep mode = in-person | digital (miro+video together).
 
   - id: grow-practice-library
     primary: false

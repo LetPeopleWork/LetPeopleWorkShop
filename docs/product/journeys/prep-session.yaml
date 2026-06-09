@@ -1,0 +1,47 @@
+id: prep-session
+name: Prep an agreed design into a setup pack
+persona: facilitator
+job: prep-the-room
+
+mental_model:
+  - "The design is agreed. Now I need to actually get ready — materials, and the fiddly per-structure setup."
+  - "I don't want a room diagram or a script; I want a checklist and the concrete prep per activity."
+  - "Prep mode is in-person OR digital (Miro for the board + video for the call) — they go together."
+
+happy_path:
+  - step: invoke-executor
+    action: With a design agreed, I point the executor at the workshop folder.
+    output: executor reads design.md (structures, medium)
+    emotion: design-done
+  - step: generate-pack
+    action: Executor derives a setup pack for the brief's medium from the practice files.
+    output: workshops/<slug>/setup.md (materials checklist + per-structure setup)
+    emotion: organized
+  - step: prep-from-it
+    action: I work through the checklist and per-structure steps to get ready.
+    output: room/board prepared; checklist ticked
+    emotion: reassured
+  - step: walk-in
+    action: I arrive set up, nothing forgotten.
+    output: session ready to run
+    emotion: ready
+
+shared_artifacts:
+  - name: design.md
+    source: designer agent (read here — structures + medium drive the pack)
+  - name: practice files
+    source: facilitation-practices skill (per-structure setup + medium-fit notes are the source of truth)
+  - name: setup.md
+    source: executor agent (only writer); facilitator ticks/edits thereafter
+  - name: prep mode
+    source: derived from brief `medium` — in-person | digital (miro+video)
+
+error_paths:
+  - when: a structure has no obvious materials
+    recovery: executor lists a sensible default and flags it, rather than inventing specifics.
+  - when: brief medium mixes in-person and digital (hybrid)
+    recovery: executor asks which to prep for, or produces both sections clearly separated.
+  - when: design references a structure (always grounded → a practice exists)
+    recovery: per-structure setup is pulled from that practice's Steps / Group config / Medium fit notes.
+
+emotional_arc: design-done -> organized -> reassured -> ready   # upward
