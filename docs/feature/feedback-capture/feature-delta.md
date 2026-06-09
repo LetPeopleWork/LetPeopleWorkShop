@@ -117,3 +117,68 @@ None contradicted. Enriched the existing `learn-from-sessions` job in `jobs.yaml
 
 ## Wave: DISCUSS / [REF] Next wave
 Handoff to **DESIGN** (`/nw-design feedback-capture`) to settle: `feedback.md` schema + template, the lesson-entry schema (one-file-per-lesson vs. appended log; tag format), the `feedback` agent contract, and the `lessons-learned/` directory convention. Strong alternative: **`/nw-spike`** slice 01 to test the real risk — *will I actually debrief when tired, and is the brain-dump→structure friction low enough?*
+
+---
+
+## Wave: DESIGN / [REF] DDD list (design decisions)
+- **[DD1] `feedback` is a new, separate agent** — not an extension of `designer`. Debrief is a distinct job; ADR-003 mandates separate stateless agents composing via the workshop folder.
+- **[DD2] Lessons = one file per lesson, frontmatter-tagged** (`practices` slugs + `themes`). Mirrors the practice-file pattern so the lessons-loop reuses the same glob+filter reader. (ADR-005)
+- **[DD3] Feedback agent advances `designed → run`.** Refines the earlier lifecycle note (was "facilitator owns run"); facilitator still owns `archived`.
+- **[DD4] Brain-dump first, gap-questions only, overall rating in frontmatter.** Low-friction; respects post-session fatigue. (DISCUSS D1)
+- **[DD5] Lesson extraction is offered, never forced; slugs inferred, theme-only allowed.** Any cited slug must resolve to a real practice (ADR-004). (DISCUSS D2/D3)
+
+## Wave: DESIGN / [REF] Component decomposition
+| Component | Path | Change |
+|---|---|---|
+| `feedback` agent | `.claude/agents/feedback.md` | CREATE NEW |
+| feedback template | `templates/feedback.md` | CREATE NEW |
+| lesson template | `templates/lesson.md` | CREATE NEW |
+| lessons store convention | `lessons-learned/` (+ README) | FORMALIZE |
+| status lifecycle | brief frontmatter | EXTEND (feedback advances `run`) |
+| architecture SSOT + ADR-005 | `docs/product/architecture/*` | EXTEND / CREATE NEW |
+
+## Wave: DESIGN / [REF] Driving ports
+- Invoke the `feedback` subagent in Claude Code, pointed at a run `workshops/<slug>/` folder.
+
+## Wave: DESIGN / [REF] Driven ports + adapters
+| Driven port | Adapter | Direction |
+|---|---|---|
+| Design context | filesystem read `workshops/<slug>/design.md` | read |
+| Practices (slug mapping) | `Glob`/`Read` `.claude/skills/facilitation-practices/practices/*.md` | read |
+| Feedback record | filesystem write `workshops/<slug>/feedback.md` | write |
+| Brief status | filesystem edit `workshops/<slug>/brief.md` (`designed→run`) | write |
+| Lessons | filesystem write `lessons-learned/<date>-<short>.md` | write |
+
+## Wave: DESIGN / [REF] Technology choices
+- Same as `workshop-designer`: Markdown + YAML frontmatter, Claude Code subagent, filesystem adapters, git. No runtime/build. Paradigm N/A.
+
+## Wave: DESIGN / [REF] Decisions table
+| ID | Decision |
+|---|---|
+| DD1 | `feedback` is a new separate agent (compose via folder) |
+| DD2 | Lessons = one file per lesson, frontmatter-tagged (ADR-005) |
+| DD3 | Feedback agent advances `designed→run` |
+| DD4 | Brain-dump + gap-questions + rating in frontmatter |
+| DD5 | Lesson extraction offered not forced; slugs inferred; theme-only allowed |
+
+## Wave: DESIGN / [REF] Reuse Analysis
+| Existing Component | File | Overlap | Decision | Justification |
+|---|---|---|---|---|
+| designer agent | `.claude/agents/designer.md` | it's also a folder-operating agent | CREATE NEW | debrief ≠ design — different job, inputs, outputs; ADR-003 requires separate stateless agents (extending would couple two responsibilities) |
+| brief/design templates | `templates/*.md` | frontmatter+body schema pattern | EXTEND (pattern reuse) | `feedback.md`/`lesson.md` follow the same frontmatter+prose shape — reuse the convention, new files |
+| status lifecycle | brief frontmatter | shared field | EXTEND | add the `designed→run` transition driven by feedback |
+| lessons-learned/ | `lessons-learned/` | placeholder dir | FORMALIZE | give the existing placeholder a real convention + README |
+| ADR-005 | `docs/product/architecture/adr-005-*.md` | — | CREATE NEW | new decision (lesson storage) with no prior equivalent |
+
+Zero unjustified CREATE NEW: the `feedback` agent is a genuinely distinct responsibility (ADR-003), and ADR-005 is a new decision record.
+
+## Wave: DESIGN / [REF] Open questions (deferred)
+- **Lessons-loop reader** — the `designer` filtering `lessons-learned/` by slug/theme is the next feature (`lessons-loop`); schema is ready (ADR-005).
+- **Theme vocabulary** — themes are free-form now; revisit a light controlled vocabulary if retrieval gets noisy.
+- **Real-session validation** — slice-01 adoption hypothesis (will I debrief when tired?) can only be tested after a workshop is actually run; agent is built and waiting.
+
+## Wave: DESIGN / [REF] Outcome Collision Check
+Skipped (correct): document/agent feature, no typed code-contract surface; registry/CLI belong to the framework repo.
+
+## Wave: DESIGN / [REF] Changed Assumptions
+Original (`docs/product/architecture/brief.md`, status lifecycle): *"the designer advances `draft → designed`, the facilitator owns `run`/`archived`."* New: the **feedback agent** advances `designed → run` (DISCUSS Story 1 AC4); the facilitator owns `archived`. Rationale: the run transition is a natural side-effect of debriefing, not a manual step. Brief SSOT updated in-wave.

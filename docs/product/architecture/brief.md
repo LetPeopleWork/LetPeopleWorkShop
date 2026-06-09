@@ -27,16 +27,18 @@ executor/feedback land later without touching the designer (ADR-003).
 | `facilitation-practices` skill | the library: index (frontmatter) + detail (prose); list/explain/recommend/ground | `.claude/skills/facilitation-practices/` | domain knowledge + read port | EXTEND |
 | `templates/` | `brief.md` + `design.md` scaffolds (schemas) | `templates/` | contract | EXTEND |
 | workshop store | per-session folder: `brief.md`, `design.md` (+ future `setup.md`, `feedback.md`) | `workshops/<slug>/` | driven adapter (filesystem, gitignored) | FORMALIZE |
-| lessons store | aggregated reusable lessons | `lessons-learned/` | driven adapter (gitignored) | placeholder |
-| `executor`, `feedback` agents | prep pack / debrief over the same folder | future `.claude/agents/` | boundary only | NOT BUILT |
+| `feedback` agent | brain-dump → `feedback.md` (+ rating, status→run); extract tagged lessons | `.claude/agents/feedback.md` | driving adapter | BUILT (feedback-capture) |
+| lessons store | one file per tagged lesson | `lessons-learned/<date>-<short>.md` | driven adapter (gitignored) | FORMALIZED (feedback-capture) |
+| `executor` agent | prep pack over the same folder | future `.claude/agents/` | boundary only | NOT BUILT |
 
 ### Ports
-- **Driving (inbound):** invoke the `designer` subagent inside Claude Code, pointed at a `brief.md`.
-  (Future: `executor`, `feedback` — same pattern.)
+- **Driving (inbound):** invoke the `designer` subagent (→ `design.md`) or the `feedback` subagent
+  (→ `feedback.md` + lessons), pointed at a `workshops/<slug>/` folder. (Future: `executor` — same pattern.)
 - **Driven (outbound), all filesystem adapters, no network:**
   - read practices library (`.claude/skills/facilitation-practices/practices/*.md`)
-  - read `workshops/<slug>/brief.md`
-  - write `workshops/<slug>/design.md`
+  - read `workshops/<slug>/brief.md` · read `workshops/<slug>/design.md` (feedback context)
+  - write `workshops/<slug>/design.md` (designer) · write `workshops/<slug>/feedback.md` (feedback)
+  - write `lessons-learned/<date>-<short>.md` (feedback) · update brief `status`
   - read `lessons-learned/*.md` *(future — lessons-loop feature)*
 
 ### Contracts (schemas)
@@ -50,8 +52,13 @@ executor/feedback land later without touching the designer (ADR-003).
 - **Grounding** — every agenda structure cites a practice by **slug**; the slug MUST resolve to a
   `practices/<slug>.md`. Designs cite slugs, never paths, so the library can move into a packaged plugin
   without rewrites (ADR-004).
-- **Status lifecycle** — `draft → designed → run → archived` on the brief; the designer advances `draft`
-  → `designed`, the facilitator owns `run`/`archived`. Makes the archive/hub queryable.
+- **Status lifecycle** — `draft → designed → run → archived` on the brief; the designer advances
+  `draft → designed`, the **feedback agent** advances `designed → run`, the facilitator owns `archived`.
+  Makes the archive/hub queryable.
+- **Feedback** — frontmatter (`slug`, `status: run`, `ran`, `rating` 1-5) + skippable body sections
+  (what worked, what didn't, timing planned-vs-actual, energy/surprises, what I'd change). See ADR-005.
+- **Lesson** — one file per lesson `lessons-learned/<date>-<short>.md`; frontmatter (`date`, `workshop`
+  slug, `practices` [slugs], `themes` [free-form]) + one-line takeaway. Loop-ready (ADR-005).
 
 ### Technology choices
 | Concern | Choice | Rationale |
@@ -131,3 +138,29 @@ flowchart TB
 per the registry's gate-scoping (code-feature pipelines only) it is out of scope, and the
 `nwave-ai outcomes` CLI belongs to the nWave framework repo, not this target project. No registry exists
 here to collide against.
+
+## C4 — Debrief flow (feedback-capture)
+```mermaid
+flowchart TB
+    facilitator["👤 Facilitator (tired, post-session)"]
+    feedback["feedback agent<br/>(driving adapter)"]
+    practices[("practices/*.md<br/>(map notes → slugs)")]
+
+    subgraph store["workshops/&lt;slug&gt;/  (gitignored)"]
+      design[("design.md<br/>read for context")]
+      brief[("brief.md<br/>status → run")]
+      fb[("feedback.md<br/>written (+ rating)")]
+    end
+    lessons[("lessons-learned/&lt;date&gt;-&lt;short&gt;.md<br/>one file per lesson, tagged")]
+
+    facilitator -->|"brain-dump"| feedback
+    design -.->|"context"| feedback
+    feedback -->|"writes"| fb
+    feedback -->|"advances status"| brief
+    feedback -->|"infer slugs"| practices
+    feedback -->|"offer → write tagged lessons"| lessons
+    lessons -.->|"future: designer reads (lessons-loop)"| facilitator
+```
+
+> Agents compose only through the folder (ADR-003): the `feedback` agent never calls the `designer`; it
+> reads `design.md` for context and writes `feedback.md` + lessons. The dashed edge is the future loop.
