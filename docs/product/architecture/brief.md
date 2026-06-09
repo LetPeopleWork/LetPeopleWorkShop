@@ -7,8 +7,8 @@
 
 ### Style
 **Ports-and-adapters (hexagonal), document-oriented.** There is no compiled application and no runtime
-service. The "business logic" lives in **agent prompts** (`.claude/agents/`) and **skill knowledge**
-(`.claude/skills/`); the "data" is **markdown + YAML frontmatter** on the filesystem. Agents are
+service. The "business logic" lives in **agent prompts** (`agents/`) and **skill knowledge**
+(`skills/`); the "data" is **markdown + YAML frontmatter** on the filesystem. Agents are
 **stateless transformers** that read the *library* (knowledge) and a *workshop folder* (work-in-progress)
 and write back into the workshop folder. This keeps the design trivially extensible: new capability = a
 new agent file; new facilitation method = a new practice file.
@@ -23,19 +23,19 @@ executor/feedback land later without touching the designer (ADR-003).
 ### Components
 | Component | Responsibility | Location | Kind | This wave |
 |---|---|---|---|---|
-| `designer` agent | brief → grounded, time-reconciled `design.md`; applies past lessons (loop); maintains status lifecycle | `.claude/agents/designer.md` | driving adapter | EXTEND (lessons-loop) |
-| `facilitation-practices` skill | the library: index (frontmatter) + detail (prose); list/explain/recommend/ground | `.claude/skills/facilitation-practices/` | domain knowledge + read port | EXTEND |
+| `designer` agent | brief → grounded, time-reconciled `design.md`; applies past lessons (loop); maintains status lifecycle | `agents/designer.md` | driving adapter | EXTEND (lessons-loop) |
+| `facilitation-practices` skill | the library: index (frontmatter) + detail (prose); list/explain/recommend/ground | `skills/facilitation-practices/` | domain knowledge + read port | EXTEND |
 | `templates/` | `brief.md` + `design.md` scaffolds (schemas) | `templates/` | contract | EXTEND |
 | workshop store | per-session folder: `brief.md`, `design.md` (+ future `setup.md`, `feedback.md`) | `workshops/<slug>/` | driven adapter (filesystem, gitignored) | FORMALIZE |
-| `feedback` agent | brain-dump → `feedback.md` (+ rating, status→run); extract tagged lessons | `.claude/agents/feedback.md` | driving adapter | BUILT (feedback-capture) |
+| `feedback` agent | brain-dump → `feedback.md` (+ rating, status→run); extract tagged lessons | `agents/feedback.md` | driving adapter | BUILT (feedback-capture) |
 | lessons store | one file per tagged lesson | `lessons-learned/<date>-<short>.md` | driven adapter (gitignored) | FORMALIZED (feedback-capture) |
-| `executor` agent | `design.md` → `setup.md` prep pack (checklist + per-structure), in-person/digital | `.claude/agents/executor.md` | driving adapter | BUILT (executor) |
+| `executor` agent | `design.md` → `setup.md` prep pack (checklist + per-structure), in-person/digital | `agents/executor.md` | driving adapter | BUILT (executor) |
 
 ### Ports
 - **Driving (inbound):** invoke `designer` (→ `design.md`), `executor` (→ `setup.md`), or `feedback`
   (→ `feedback.md` + lessons), each pointed at a `workshops/<slug>/` folder.
 - **Driven (outbound), all filesystem adapters, no network:**
-  - read practices library (`.claude/skills/facilitation-practices/practices/*.md`)
+  - read practices library (`skills/facilitation-practices/practices/*.md`)
   - read `workshops/<slug>/brief.md` · read `workshops/<slug>/design.md` (executor + feedback context)
   - write `workshops/<slug>/design.md` (designer) · write `workshops/<slug>/setup.md` (executor) · write `workshops/<slug>/feedback.md` (feedback)
   - write `lessons-learned/<date>-<short>.md` (feedback) · update brief `status` (designer, feedback)
@@ -68,8 +68,8 @@ executor/feedback land later without touching the designer (ADR-003).
 | Concern | Choice | Rationale |
 |---|---|---|
 | Data format | Markdown + YAML frontmatter | Human-ownable, diffable, GitHub-native; frontmatter gives a machine index without a database |
-| Agents | Claude Code subagents (`.claude/agents/`) | The repo *is* the tool (D2); no app to build/host |
-| Library capability | Claude Code skill (`.claude/skills/`) | Fulfills "extensible practices via skills" (D7); plugin-portable |
+| Agents | Claude Code subagents (`agents/`) | The repo *is* the tool (D2); no app to build/host |
+| Library capability | Claude Code skill (`skills/`) | Fulfills "extensible practices via skills" (D7); plugin-portable |
 | Versioning | git (local now; GitHub remote later) | History + public distribution; private content gitignored (D6) |
 | Runtime / language / build | **none** | Document-oriented; nothing to compile or run |
 | (Deferred) validator | TBD — a small lint script if grounding/schema needs machine enforcement | Not built now; agent self-checks grounding (open question) |
@@ -80,10 +80,11 @@ paradigm line written this wave.
 
 ### Extensibility & distribution
 - **Add a practice:** drop a markdown file in the skill's `practices/` (no code change).
-- **Add an agent:** drop a file in `.claude/agents/`.
-- **Distribute:** fork the repo today; later wrap `.claude/` in `.claude-plugin/plugin.json` and publish
-  to a marketplace (ADR-001). The whole toolkit is the self-contained `.claude/` subtree, with zero
-  dependency on user content under `workshops/`.
+- **Add an agent:** drop a file in `agents/`.
+- **Distribute:** the repo **is** the plugin (ADR-007) — `.claude-plugin/plugin.json` at root with
+  `agents/` + `skills/` + `templates/` bundled. Install via `/plugin install` (or the community
+  marketplace); dev via `claude --plugin-dir .`. Toolkit files are read via `${CLAUDE_PLUGIN_ROOT}`; the
+  toolkit has zero dependency on user content under `workshops/`.
 
 ## C4 — System Context
 ```mermaid
@@ -105,7 +106,7 @@ flowchart TB
 flowchart TB
     facilitator["👤 Facilitator"]
 
-    subgraph claude[".claude/ — THE TOOLKIT (future plugin payload)"]
+    subgraph claude["repo root — THE PLUGIN (agents + skills)"]
       designer["designer agent<br/>(driving adapter)"]
       skill["facilitation-practices skill<br/>library: frontmatter index + prose"]
       practices[("practices/*.md<br/>structures &amp; principles")]

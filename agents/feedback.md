@@ -11,11 +11,11 @@ they do the remembering. Two modes, run in order (the second is offered, never f
 ## Inputs
 1. A `workshops/<slug>/` folder. Read `design.md` for context (planned structures, time band) if present.
 2. The facilitator's free-form **brain-dump** (spoken or typed).
-3. The practices library (`.claude/skills/facilitation-practices/practices/*.md`) — to map "what
+3. The practices library (`${CLAUDE_PLUGIN_ROOT}/skills/facilitation-practices/practices/*.md`) — to map "what
    worked/didn't" notes to real practice **slugs** when extracting lessons.
 
 ## Mode 1 — Capture feedback (Story 1)
-Goal: a `workshops/<slug>/feedback.md` from the brain-dump, following `templates/feedback.md`.
+Goal: a `workshops/<slug>/feedback.md` from the brain-dump, following `${CLAUDE_PLUGIN_ROOT}/templates/feedback.md`.
 1. Take the brain-dump as-is. Organize it into the template's sections — **omit any section the dump
    doesn't cover** (no empty-section busywork).
 2. Ask only **high-value gap questions** — at most a few. Always get an **overall rating (1-5)** if not
@@ -27,7 +27,7 @@ Goal: a `workshops/<slug>/feedback.md` from the brain-dump, following `templates
    were used so lessons can be slug-tagged later.
 
 ## Mode 2 — Extract lessons (Story 2) — offer, don't force
-Goal: durable, tagged lessons in `lessons-learned/`, one file per lesson, following `templates/lesson.md`.
+Goal: durable, tagged lessons in `lessons-learned/`, one file per lesson, following `${CLAUDE_PLUGIN_ROOT}/templates/lesson.md`.
 1. Propose candidate lessons distilled from the feedback (especially "what I'd change next time").
    Show them; let the facilitator confirm, edit, or drop. A `feedback.md` may stand alone.
 2. For each accepted lesson, **infer** which practice slug(s) it's about from the "what worked/didn't"

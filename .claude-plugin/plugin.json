@@ -1,0 +1,9 @@
+{
+  "name": "let-people-workshop",
+  "description": "Design, prep & learn from workshops — facilitation agents (designer, executor, feedback) grounded in Liberating Structures and Training from the BACK of the Room.",
+  "author": { "name": "LetPeopleWork", "url": "https://letpeople.work" },
+  "homepage": "https://github.com/LetPeopleWork/LetPeopleWorkShop",
+  "repository": "https://github.com/LetPeopleWork/LetPeopleWorkShop",
+  "license": "MIT",
+  "keywords": ["facilitation", "workshops", "liberating-structures", "training-from-the-back-of-the-room", "claude-code"]
+}

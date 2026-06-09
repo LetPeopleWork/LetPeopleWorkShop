@@ -5,6 +5,15 @@
 > Claude Code plugin/marketplace mechanics (docs: code.claude.com/docs/en/plugins, plugin-marketplaces,
 > plugins-reference).
 
+## ✅ RESOLVED (ADR-007) — what we actually did
+The exploration below (generator, npm, release branch, `./plugin`) is **superseded**. Final approach:
+the **repo *is* the plugin** (plugin-first: `agents/` + `skills/` + `templates/` + `.claude-plugin/plugin.json`
+at root; toolkit reads via `${CLAUDE_PLUGIN_ROOT}`; no `version` → commit-SHA auto-versioning). Distribute via
+the repo's own `marketplace.json` (`source: "."`) **and** a one-time submission to the **community marketplace**
+(`anthropics/claude-plugins-community`) — after approval, every push auto-updates the pin. No build step, no
+release branch, no committed artifacts. Dev/clone-use via `claude --plugin-dir .`. See **ADR-007**. The notes
+below are kept only as the decision trail.
+
 ## How Claude Code plugins actually work (the facts that shape this)
 - A **plugin** is a directory with a `.claude-plugin/plugin.json` manifest. **`agents/`, `skills/`,
   `commands/`, `hooks/` live at the plugin ROOT** — not under `.claude/`. (Only `plugin.json` sits in

@@ -4,8 +4,8 @@
 
 A markdown-native, Claude-Code-native toolkit for designing, running, and learning from workshops.
 Bring a brief; grounded assistants help you **design** the session, **prep** the room (or Miro/video),
-and **learn** from it afterwards — so the next one is better. The repository *is* the tool — there's no
-app to install.
+and **learn** from it afterwards — so the next one is better. The repo *is* a Claude Code **plugin** —
+install it and the agents work in any workspace; there's no app to run.
 
 > **Status:** the full loop works end-to-end — **designer** (applies your past lessons), **executor**
 > (in-person / digital prep packs), and **feedback** (debrief → tagged lessons), over a markdown
@@ -13,37 +13,39 @@ app to install.
 
 ## What's here
 ```
-.claude/                              THE TOOLKIT (reusable; this is the future plugin payload). PUBLIC.
-  agents/designer.md                  The `designer` subagent.
-  skills/facilitation-practices/      The practices library, as a Skill (list/explain/recommend/ground).
-    practices/*.md                    Facilitation structures, one markdown file each.
-templates/        brief.md + design.md formats to copy. PUBLIC.
-workshops/        Your sessions: brief → design (→ feedback → lessons). PRIVATE (gitignored, except EXAMPLE-*).
-lessons-learned/  Aggregated reusable lessons. PRIVATE (gitignored).
-docs/             Product vision, jobs, journeys, feature specs. PUBLIC.
+.claude-plugin/plugin.json        Plugin manifest — the repo IS the plugin.
+.claude-plugin/marketplace.json   Lets you add it as a marketplace directly.
+agents/                           designer · executor · feedback subagents.
+skills/facilitation-practices/    The practices library as a Skill (list/explain/recommend/ground).
+  practices/*.md                  Facilitation structures, one markdown file each.
+templates/                        brief · design · setup · feedback · lesson formats.
+docs/                             Product vision, jobs, journeys, architecture, ADRs.
+workshops/EXAMPLE-*/              A sanitized sample (your real sessions live in YOUR workspace).
 ```
 
-### Toolkit vs. content (built for a clean future plugin)
-The whole reusable tool lives under **`.claude/`** — which already mirrors a Claude Code *plugin*
-layout (`agents/`, `skills/`). Your *content* (`workshops/`, `lessons-learned/`) lives at the root and
-is gitignored. So distribution can be **either**: fork this repo (works today), **or** later wrap
-`.claude/` in a `.claude-plugin/plugin.json` and publish it to a marketplace — a lift, not a rewrite.
+## Install
+```
+# Add the LetPeopleWork marketplace, then install:
+/plugin marketplace add LetPeopleWork/LetPeopleWorkShop
+/plugin install let-people-workshop@letpeoplework
+```
+To hack on it locally, clone and run `claude --plugin-dir .`. (A community-marketplace install —
+`/plugin marketplace add anthropics/claude-plugins-community` — lands once the plugin is approved.)
 
-## Public toolkit vs. your private content
-This repo is meant to be pushed **publicly** so other facilitators can use it — but **your real
-workshop designs, feedback, and lessons never get committed.** The `.gitignore` excludes everything
-under `workshops/` (except the sanitized `EXAMPLE-*`) and `lessons-learned/`. Fork it, and your
-sessions stay yours.
+## Your content stays yours
+The plugin carries the *toolkit*; your **workshops, designs, feedback, and lessons live in your own
+workspace**, never in this repo. (This repo's `.gitignore` also guards against committing real sessions
+during development — only the sanitized `workshops/EXAMPLE-*` is tracked.)
 
-## Quick start
-1. Copy `templates/brief.md` to `workshops/<your-slug>/brief.md` and fill it in.
-2. In Claude Code, run the **designer** agent on that brief.
-3. Read the generated `workshops/<your-slug>/design.md` — a timed agenda where every structure cites a
-   practice, reconciled to your time box. Edit freely; it's yours.
-4. See `workshops/EXAMPLE-team-retro/` for a worked example.
+## Quick start (using it)
+With the plugin installed, in your own workspace:
+1. Ask the **designer** to start a workshop — it scaffolds `workshops/<slug>/brief.md` from the template.
+2. Fill the brief; the designer writes a grounded, time-reconciled `workshops/<slug>/design.md`.
+3. Ask the **executor** for a prep pack; run the session; then **feedback** to debrief → tagged lessons.
+See `workshops/EXAMPLE-team-retro/` in this repo for what a brief + design look like.
 
 ## Add a facilitation practice
-Copy `.claude/skills/facilitation-practices/practices/_TEMPLATE.md` to a new kebab-case file, fill it
+Copy `skills/facilitation-practices/practices/_TEMPLATE.md` to a new kebab-case file, fill it
 in. The `facilitation-practices` skill and the `designer` pick it up automatically — no code change.
 Seeded with [Liberating Structures](https://www.liberatingstructures.com/) and
 [Training from the BACK of the Room](https://bowperson.com/resources/index.html); add more anytime.

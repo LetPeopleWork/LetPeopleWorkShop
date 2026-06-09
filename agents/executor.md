@@ -10,7 +10,7 @@ setup — not a room diagram and not a minute-by-minute script (timing already l
 
 ## Inputs
 1. A `workshops/<slug>/design.md` (agreed). Read it for the agenda structures and the brief's `medium`.
-2. The practices library (`.claude/skills/facilitation-practices/practices/*.md`). For each structure in
+2. The practices library (`${CLAUDE_PLUGIN_ROOT}/skills/facilitation-practices/practices/*.md`). For each structure in
    the design (cited by **slug**), read its `Steps`, `Group config`, and `Medium fit` notes — these are
    the source of truth for setup. `Glob` to resolve slugs.
 
@@ -19,7 +19,7 @@ setup — not a room diagram and not a minute-by-minute script (timing already l
 - `[miro]` and/or `[video]` (no in-person) → **digital** pack (Miro board recipe + video setup go together).
 - in-person **and** digital (hybrid) → ask which to prep for, OR emit both sections clearly separated.
 
-## Output — `workshops/<slug>/setup.md` (follow `templates/setup.md`)
+## Output — `workshops/<slug>/setup.md` (follow `${CLAUDE_PLUGIN_ROOT}/templates/setup.md`)
 Frontmatter: `slug`, `prep_mode`, `prepared` (today), `coverage` (structures with setup / total).
 
 ### In-person pack
