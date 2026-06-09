@@ -50,8 +50,8 @@ files everywhere. For local hacking, run `claude --plugin-dir .` (which sets `${
 with relative paths). Add a **build script** (`scripts/build-plugin.sh`) that *generates* the plugin form
 from `main`: copies `.claude/agents/`→`agents/`, `.claude/skills/`→`skills/`, `templates/`→`templates/`,
 **rewrites toolkit paths to `${CLAUDE_PLUGIN_ROOT}`**, and emits `.claude-plugin/plugin.json`. A thin
-**GitHub Action** runs it on a release tag and publishes the built tree (a `release` branch or release
-asset) that the marketplace points at.
+**GitHub Action** runs it on a manual release trigger and commits the built plugin to a tracked `./plugin`
+directory on `main` (trunk-based; no release branch), tagged `v<version>`.
 - ✅ Single source of truth (`main`/`.claude/`); clone-and-use untouched; plugin auto-generated — both
   audiences, no hand-maintained second layout. ✅ Re-deriving from `main` removes the "moving target" risk —
   build anytime, bump the version. ❌ A small path-rewrite transform to keep correct (few, well-defined refs;
@@ -75,9 +75,10 @@ source of truth; the plugin is a *generated artifact*.
 - **CI guard:** after building, assert (a) `plugin.json` is valid JSON with required fields, (b) expected
   agents/skills/templates present, (c) **no relative toolkit path leaked** — `grep` the built agents for
   `.claude/skills/` or a bare `templates/` toolkit ref and fail if found.
-- **Publish:** GitHub Action on `v*` tag → run build → push `build/plugin/` to the `release` branch (or
-  attach as a release asset). `.claude-plugin/marketplace.json` on `main` lists the plugin with
-  `source: {github, repo: LetPeopleWork/LetPeopleWorkShop, ref: release}` (exact wiring confirmed in the spike).
+- **Publish (trunk-based — no release branch):** the gated GitHub Action commits the built plugin into a
+  tracked **`./plugin`** directory on `main` and tags `v<version>`. `.claude-plugin/marketplace.json` on
+  `main` lists the plugin with `source: "./plugin"`. The released snapshot lives on trunk beside the
+  `.claude/` dev source; releases are ordinary commits to main, not a long-lived branch.
 
 ## Recommended approach: SPIKE first (de-risk before migrating)
 Consistent with how we built everything else — validate the riskiest unknown cheaply before the full move.

@@ -1,14 +1,16 @@
 name: Plugin Release
 
-# - Every push to main / PR: build + test the generated plugin (CI).
-# - Release: trigger "Run workflow" (workflow_dispatch). The version is computed automatically
-#   (next semver from the latest tag; first release -> 1.0.0). The publish job is gated by the
-#   `marketplace` environment (manual approval), then pushes the plugin to the `release` branch
-#   and tags the release. No manual version numbers.
+# Trunk-based. No release branch.
+# - Push to main / PR: build + test the generated plugin (CI). (Skipped for release commits that
+#   only touch plugin/.)
+# - Release: "Run workflow" (workflow_dispatch). Version is auto-computed (next semver from the latest
+#   tag; first release -> 1.0.0). The publish job is gated by the `marketplace` environment (manual
+#   approval), then commits the built plugin to ./plugin on main and tags v<version>. No version typing.
 
 on:
   push:
     branches: [main]
+    paths-ignore: ["plugin/**"]      # release commits only touch plugin/ — don't re-trigger CI
   pull_request:
   workflow_dispatch:
     inputs:
@@ -64,16 +66,7 @@ jobs:
           fetch-depth: 0
       - name: Rebuild plugin at the release version
         run: bash scripts/build-plugin.sh "$VERSION"
-      - name: Publish to the `release` branch (marketplace source)
+      - name: Publish to ./plugin on main + tag (trunk-based)
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: bash scripts/publish-plugin.sh
-      - name: Tag the release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          git config user.name  "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git tag -a "v$VERSION" -m "Release v$VERSION"
-          git push "https://x-access-token:${GITHUB_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" "v$VERSION"
-          echo "✓ tagged v$VERSION"
