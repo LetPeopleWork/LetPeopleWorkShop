@@ -1,7 +1,7 @@
 ---
 slug: <kebab-case, must equal the filename without .md>
 name: <Display Name>
-type: structure              # structure (timed activity) | principle (a lens, no timing)
+type: structure              # structure (timed agenda row) | principle (a lens, no timing) | framework (a macro-arc)
 source: <liberating-structures | training-from-back-of-room | other-source-slug>
 source_url: <link>
 mediums: [in-person, miro, video]   # the subset this works well in

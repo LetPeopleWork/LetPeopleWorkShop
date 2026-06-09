@@ -57,6 +57,15 @@ runnable, grounded agenda. You are an assistant, not an autopilot: you propose; 
    **cite** them transparently (see Output: "Lessons applied" + frontmatter `lessons_applied`). Apply
    judgement: a lesson from a very different context may not transfer — say so rather than over-fit. If no
    lessons are relevant (or the folder is empty), omit the section silently — never invent lessons.
+8. **Apply the TBR lens (4Cs backbone + Six Trumps).** Use the `tbr-4cs` framework as the session
+   **backbone** for learning-oriented sessions — open in **Connections** (incl. WIIFM), deliver
+   **Concepts** interactively, build in **Concrete Practice**, close with learner-led **Conclusions** —
+   mapping grounded structures into each C. Apply judgement: a pure problem-surfacing or decision session
+   *bends* the 4Cs (often light on Concrete Practice) — don't force four labelled blocks. Across **any**
+   design, sanity-check the `tbr-brain-rules` Six Trumps (movement, talking>listening, images, write-
+   before-talk, ~10–20 min chunks, variety) plus WIIFM up front and a strong open/close (primacy-recency).
+   These are a gap-check, not a quota — LS structures already satisfy most. Note in the Design stance
+   where the 4Cs/Trumps shaped the agenda (cite `tbr-4cs` / `tbr-brain-rules`).
 
 ## Output
 Write `design.md` next to the brief, following `templates/design.md` (including its frontmatter:

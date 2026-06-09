@@ -26,3 +26,9 @@ for the qualitative detail. Frontmatter: `slug` (== filename), `name`, `type` (`
   an agenda row with a duration.
 - Adding a practice now requires filling frontmatter (mild ceremony) — documented in `_TEMPLATE.md`.
 - The 6 seeded practices were migrated to this shape in the same wave.
+
+## Amendment (2026-06-09)
+`type` gains a third value **`framework`** — a macro-arc that structures are mapped onto (vs. `structure`
+= a timed agenda row, `principle` = a cross-agenda lens). Introduced for `tbr-4cs` (the TBR 4Cs session
+backbone). `framework`/`principle` entries omit `group_*`/`time_*`. The designer applies a `framework` as
+the session backbone and `principle`s as lenses — never as agenda rows.

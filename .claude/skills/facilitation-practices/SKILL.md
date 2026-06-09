@@ -30,9 +30,12 @@ so the library can move (e.g. into a packaged plugin) without rewriting any desi
 Each practice is YAML frontmatter (machine-readable) followed by a markdown body (the rich detail).
 
 **Frontmatter fields:**
-`slug` (== filename) · `name` · `type` (`structure` | `principle`) · `source` · `source_url` ·
+`slug` (== filename) · `name` · `type` (`structure` | `principle` | `framework`) · `source` · `source_url` ·
 `mediums` (subset of `in-person`/`miro`/`video`) · `group_min` / `group_max` · `time_min` / `time_max`
 (minutes; structures only) · `tags` (optional).
+
+`type` meanings: **`structure`** = a timed activity that becomes an agenda row; **`principle`** = a lens
+applied across the agenda (no timing); **`framework`** = a macro-arc you map structures onto (e.g. the 4Cs).
 
 **Body sections:** `Purpose · When to use · Group config · Timing · Medium fit (per-medium notes) ·
 Steps · Facilitator notes`.
@@ -43,8 +46,9 @@ To recommend structures for a situation, filter on frontmatter first, then judge
 - **Group size** → `group_min ≤ size ≤ group_max`.
 - **Time** → `time_min ≤ available slot`.
 - **Purpose** → match `tags` + the `Purpose`/`When to use` prose.
-A `type: principle` entry (e.g. `tbr-concrete-practice`) is a *lens* applied across the agenda, not a
-timed block — recommend it as a stance, never as an agenda row with a duration.
+A `type: principle` entry (e.g. `tbr-concrete-practice`, `tbr-brain-rules`) is a *lens* applied across the
+agenda, not a timed block. A `type: framework` entry (e.g. `tbr-4cs`) is a *backbone* you sequence
+structures onto. Recommend both as stance/structure-of-the-whole, never as an agenda row with a duration.
 
 ## Sources seeded so far
 - **Liberating Structures** — https://www.liberatingstructures.com/
@@ -58,4 +62,6 @@ timed block — recommend it as a stance, never as an agenda row with a duration
 | `triz` | LS | Charged topics; admitting what we already do wrong |
 | `what-so-what-now-what` | LS | Debrief; sense-making without premature solutions |
 | `wicked-questions` | LS | Naming a paradox instead of forcing an either/or |
-| `tbr-concrete-practice` | TBR | A *lens*: participants do the work, not the facilitator |
+| `tbr-concrete-practice` | TBR | *Lens*: participants do the work, not the facilitator |
+| `tbr-brain-rules` | TBR | *Lens*: the Six Trumps (+ WIIFM, primacy-recency) — brain-friendly design |
+| `tbr-4cs` | TBR | *Framework*: session backbone — Connections → Concepts → Concrete Practice → Conclusions |
