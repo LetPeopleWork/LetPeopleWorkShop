@@ -1,0 +1,46 @@
+name: Plugin Release
+
+# build/test the generated plugin on every push & PR; publish to the marketplace only on a
+# version tag (v*), and only after manual approval via the `marketplace` environment.
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    name: Build & test plugin
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0          # full history so the build can derive the version from tags
+      - name: Generate + validate the plugin
+        run: bash scripts/build-plugin.sh
+      - name: Upload built plugin
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugin
+          path: build/plugin
+          if-no-files-found: error
+
+  publish:
+    name: Publish to marketplace
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/v')   # only on version tags
+    runs-on: ubuntu-latest
+    environment: marketplace                      # <-- manual-approval gate (configure required reviewers in repo settings)
+    steps:
+      - uses: actions/checkout@v4
+      - name: Rebuild plugin at this tag
+        run: bash scripts/build-plugin.sh "${GITHUB_REF_NAME#v}"
+      - name: Push plugin to the `release` branch (marketplace source)
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: bash scripts/publish-plugin.sh

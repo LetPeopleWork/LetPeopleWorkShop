@@ -14,6 +14,9 @@
 # …but keep its explainer so the folder exists in a fresh clone:
 !/lessons-learned/README.md
 
+# Generated plugin build artifact (produced by scripts/build-plugin.sh; published by CI)
+/build/
+
 # Editor / OS noise
 .DS_Store
 *.swp
