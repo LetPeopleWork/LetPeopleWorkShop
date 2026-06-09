@@ -114,3 +114,69 @@ None contradicted. Enriched the existing `prep-the-room` job in `jobs.yaml` with
 
 ## Wave: DISCUSS / [REF] Next wave
 Handoff to **DESIGN** (`/nw-design executor`) to settle: the `setup.md` schema + template, the `executor` agent contract, how brief `medium` maps to prep mode, and how per-structure setup is derived from practice frontmatter/body. Strong alternative: build slice 01 directly (the mechanism is low-risk; the value question is best answered by a real in-person prep).
+
+---
+
+## Wave: DESIGN / [REF] DDD list (design decisions)
+- **[DD1] `executor` is a third, separate agent** completing the triad (designer → executor → feedback), composing via the workshop folder. (ADR-003)
+- **[DD2] `setup.md` = checklist + per-structure setup; two prep modes (in-person | digital).** No layout diagram, no run-sheet. (ADR-006)
+- **[DD3] Markdown recipes only — no Miro API.** Digital pack is a build-it-yourself board recipe. (ADR-006)
+- **[DD4] Per-structure setup is grounded** in each practice's `Steps`/`Group config`/`Medium fit` notes; no-materials structure → flagged default. (extends ADR-004)
+- **[DD5] Executor does not change brief `status`.** Prep is pre-session; `feedback` owns `run`.
+
+## Wave: DESIGN / [REF] Component decomposition
+| Component | Path | Change |
+|---|---|---|
+| `executor` agent | `.claude/agents/executor.md` | CREATE NEW |
+| setup template | `templates/setup.md` | CREATE NEW |
+| `facilitation-practices` skill | `.claude/skills/facilitation-practices/` | REUSE (read Medium-fit notes; no change) |
+| architecture SSOT + ADR-006 | `docs/product/architecture/*` | EXTEND / CREATE NEW |
+
+## Wave: DESIGN / [REF] Driving ports
+- Invoke the `executor` subagent in Claude Code, pointed at a `workshops/<slug>/` folder with an agreed `design.md`.
+
+## Wave: DESIGN / [REF] Driven ports + adapters
+| Driven port | Adapter | Direction |
+|---|---|---|
+| Design (structures + medium) | filesystem read `workshops/<slug>/design.md` | read |
+| Practices (per-structure setup) | `Glob`/`Read` `.claude/skills/facilitation-practices/practices/*.md` | read |
+| Setup pack | filesystem write `workshops/<slug>/setup.md` | write |
+
+No status write (DD5). No network.
+
+## Wave: DESIGN / [REF] Technology choices
+- Same as the other agents: Markdown + YAML frontmatter, Claude Code subagent, filesystem adapters, git. No runtime/build. Paradigm N/A.
+
+## Wave: DESIGN / [REF] Decisions table
+| ID | Decision |
+|---|---|
+| DD1 | `executor` = third separate agent (compose via folder) |
+| DD2 | `setup.md` = checklist + per-structure; modes in-person/digital (ADR-006) |
+| DD3 | Markdown recipes only, no Miro API (ADR-006) |
+| DD4 | Per-structure setup grounded in practice notes |
+| DD5 | Executor does not change brief status |
+
+## Wave: DESIGN / [REF] Reuse Analysis
+| Existing Component | File | Overlap | Decision | Justification |
+|---|---|---|---|---|
+| designer agent | `.claude/agents/designer.md` | folder-operating agent | CREATE NEW | prep ≠ design — different inputs/outputs/job; ADR-003 requires separate stateless agents |
+| feedback agent | `.claude/agents/feedback.md` | folder-operating agent | CREATE NEW | prep (pre-session) ≠ debrief (post-session); distinct trigger + outputs |
+| facilitation-practices skill | `.claude/skills/.../practices/*.md` | source of per-structure setup | REUSE | executor consumes existing `Medium fit`/`Steps` notes — no change needed |
+| brief/design/feedback templates | `templates/*.md` | frontmatter+body pattern | EXTEND (pattern) | `setup.md` reuses the convention, new file |
+| ADR-006 | `docs/product/architecture/adr-006-*.md` | — | CREATE NEW | new decision (setup scope/modes) |
+
+Zero unjustified CREATE NEW: the `executor` is a genuinely distinct responsibility in the triad (ADR-003); ADR-006 is a new decision record.
+
+## Wave: DESIGN / [REF] Open questions (deferred)
+- **Practice `Medium fit` richness** — digital packs are only as good as the practices' Miro/Video notes; enrich as the library grows.
+- **Live Miro generation** — explicitly a possible *separate future feature* (own runtime/integration decision), not this one (ADR-006).
+- **Room-layout / run-sheet** — out now; revisit if prep feels incomplete in practice.
+- **Real-session validation** — slice-01 value (does the checklist save prep + catch misses?) tested by dogfooding on the cross-team in-person design.
+
+## Wave: DESIGN / [REF] Outcome Collision Check
+Skipped (correct): document/agent feature, no typed code-contract surface; registry/CLI belong to the framework repo.
+
+## Wave: DESIGN / [REF] Build note
+For this toolkit the agent's design *is* its prompt file, so the concrete artifacts were built in-wave
+(`.claude/agents/executor.md`, `templates/setup.md`). Slice 01 (in-person) can be dogfooded immediately on
+the real `cross-team-collab-s1` design.

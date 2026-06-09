@@ -29,16 +29,16 @@ executor/feedback land later without touching the designer (ADR-003).
 | workshop store | per-session folder: `brief.md`, `design.md` (+ future `setup.md`, `feedback.md`) | `workshops/<slug>/` | driven adapter (filesystem, gitignored) | FORMALIZE |
 | `feedback` agent | brain-dump → `feedback.md` (+ rating, status→run); extract tagged lessons | `.claude/agents/feedback.md` | driving adapter | BUILT (feedback-capture) |
 | lessons store | one file per tagged lesson | `lessons-learned/<date>-<short>.md` | driven adapter (gitignored) | FORMALIZED (feedback-capture) |
-| `executor` agent | prep pack over the same folder | future `.claude/agents/` | boundary only | NOT BUILT |
+| `executor` agent | `design.md` → `setup.md` prep pack (checklist + per-structure), in-person/digital | `.claude/agents/executor.md` | driving adapter | BUILT (executor) |
 
 ### Ports
-- **Driving (inbound):** invoke the `designer` subagent (→ `design.md`) or the `feedback` subagent
-  (→ `feedback.md` + lessons), pointed at a `workshops/<slug>/` folder. (Future: `executor` — same pattern.)
+- **Driving (inbound):** invoke `designer` (→ `design.md`), `executor` (→ `setup.md`), or `feedback`
+  (→ `feedback.md` + lessons), each pointed at a `workshops/<slug>/` folder.
 - **Driven (outbound), all filesystem adapters, no network:**
   - read practices library (`.claude/skills/facilitation-practices/practices/*.md`)
-  - read `workshops/<slug>/brief.md` · read `workshops/<slug>/design.md` (feedback context)
-  - write `workshops/<slug>/design.md` (designer) · write `workshops/<slug>/feedback.md` (feedback)
-  - write `lessons-learned/<date>-<short>.md` (feedback) · update brief `status`
+  - read `workshops/<slug>/brief.md` · read `workshops/<slug>/design.md` (executor + feedback context)
+  - write `workshops/<slug>/design.md` (designer) · write `workshops/<slug>/setup.md` (executor) · write `workshops/<slug>/feedback.md` (feedback)
+  - write `lessons-learned/<date>-<short>.md` (feedback) · update brief `status` (designer, feedback)
   - read `lessons-learned/*.md` *(future — lessons-loop feature)*
 
 ### Contracts (schemas)
@@ -59,6 +59,9 @@ executor/feedback land later without touching the designer (ADR-003).
   (what worked, what didn't, timing planned-vs-actual, energy/surprises, what I'd change). See ADR-005.
 - **Lesson** — one file per lesson `lessons-learned/<date>-<short>.md`; frontmatter (`date`, `workshop`
   slug, `practices` [slugs], `themes` [free-form]) + one-line takeaway. Loop-ready (ADR-005).
+- **Setup** — frontmatter (`slug`, `prep_mode` in-person|digital, `prepared`, `coverage`) + a tickable
+  materials/pre-build checklist + per-structure setup steps grounded in practice notes. Markdown recipe
+  only (no Miro API). See ADR-006. Prep is pre-session → does not change brief `status`.
 
 ### Technology choices
 | Concern | Choice | Rationale |
@@ -164,3 +167,30 @@ flowchart TB
 
 > Agents compose only through the folder (ADR-003): the `feedback` agent never calls the `designer`; it
 > reads `design.md` for context and writes `feedback.md` + lessons. The dashed edge is the future loop.
+
+## C4 — Prep flow (executor)
+```mermaid
+flowchart TB
+    facilitator["👤 Facilitator (prepping)"]
+    executor["executor agent<br/>(driving adapter)"]
+    practices[("practices/*.md<br/>Steps · Group config · Medium fit")]
+
+    subgraph store["workshops/&lt;slug&gt;/  (gitignored)"]
+      design[("design.md<br/>structures + medium")]
+      setup[("setup.md<br/>checklist + per-structure")]
+    end
+
+    facilitator -->|"invoke"| executor
+    design -->|"read structures + medium"| executor
+    executor -->|"per-structure setup (by slug)"| practices
+    executor -->|"writes (prep_mode: in-person | digital)"| setup
+```
+
+> The executor is a pure read→write transform: `design.md` + practice notes → `setup.md`. It does NOT
+> change the brief `status` (prep is pre-session; `feedback` owns the `run` transition). Markdown recipe
+> only — the digital pack is a Miro/video build-it-yourself recipe, not a live board (ADR-006).
+
+## Agent triad (composition summary)
+Three driving agents, each a stateless transform over the shared `workshops/<slug>/` folder:
+`designer` (brief→design) · `executor` (design→setup) · `feedback` (run→feedback + lessons). None call
+each other (ADR-003). A future `lessons-loop` closes the cycle by having `designer` read `lessons-learned/`.
