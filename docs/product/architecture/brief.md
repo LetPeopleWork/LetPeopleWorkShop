@@ -23,7 +23,7 @@ executor/feedback land later without touching the designer (ADR-003).
 ### Components
 | Component | Responsibility | Location | Kind | This wave |
 |---|---|---|---|---|
-| `designer` agent | brief → grounded, time-reconciled `design.md`; maintains status lifecycle | `.claude/agents/designer.md` | driving adapter | EXTEND |
+| `designer` agent | brief → grounded, time-reconciled `design.md`; applies past lessons (loop); maintains status lifecycle | `.claude/agents/designer.md` | driving adapter | EXTEND (lessons-loop) |
 | `facilitation-practices` skill | the library: index (frontmatter) + detail (prose); list/explain/recommend/ground | `.claude/skills/facilitation-practices/` | domain knowledge + read port | EXTEND |
 | `templates/` | `brief.md` + `design.md` scaffolds (schemas) | `templates/` | contract | EXTEND |
 | workshop store | per-session folder: `brief.md`, `design.md` (+ future `setup.md`, `feedback.md`) | `workshops/<slug>/` | driven adapter (filesystem, gitignored) | FORMALIZE |
@@ -39,7 +39,7 @@ executor/feedback land later without touching the designer (ADR-003).
   - read `workshops/<slug>/brief.md` · read `workshops/<slug>/design.md` (executor + feedback context)
   - write `workshops/<slug>/design.md` (designer) · write `workshops/<slug>/setup.md` (executor) · write `workshops/<slug>/feedback.md` (feedback)
   - write `lessons-learned/<date>-<short>.md` (feedback) · update brief `status` (designer, feedback)
-  - read `lessons-learned/*.md` *(future — lessons-loop feature)*
+  - read `lessons-learned/*.md` (designer — the learning loop; applies relevant past lessons)
 
 ### Contracts (schemas)
 - **Practice file** — YAML frontmatter index (`slug`, `name`, `type`, `source`, `source_url`, `mediums`,
@@ -47,8 +47,9 @@ executor/feedback land later without touching the designer (ADR-003).
   `Timing`, `Medium fit`, `Steps`, `Facilitator notes`). `type: principle` omits group/time. See ADR-002.
 - **Brief** — frontmatter (`slug`, `status`, `created`, `medium`, `group_size`, `duration_min/max`) +
   prose (convener, goal, audience, constraints/sensitivities).
-- **Design** — frontmatter (`slug`, `status`, `designed`, `total_min`, `time_band`, `grounding`, `reuse`)
-  + body (goal, design stance, agenda table, time reconciliation, facilitator notes, grounding check).
+- **Design** — frontmatter (`slug`, `status`, `designed`, `total_min`, `time_band`, `grounding`,
+  `lessons_applied`, `reuse`) + body (goal, design stance, agenda table, time reconciliation, facilitator
+  notes, **lessons applied** when relevant, grounding check).
 - **Grounding** — every agenda structure cites a practice by **slug**; the slug MUST resolve to a
   `practices/<slug>.md`. Designs cite slugs, never paths, so the library can move into a packaged plugin
   without rewrites (ADR-004).
@@ -126,7 +127,7 @@ flowchart TB
     designer -->|"reads (grounding, by slug)"| practices
     designer -->|"reads"| brief
     designer -->|"writes + sets status"| design
-    lessons -.->|"future: designer reads past lessons"| designer
+    lessons -->|"designer reads &amp; applies (lessons-loop)"| designer
 
     executor["executor agent (future)"]:::future
     feedback["feedback agent (future)"]:::future
@@ -193,4 +194,6 @@ flowchart TB
 ## Agent triad (composition summary)
 Three driving agents, each a stateless transform over the shared `workshops/<slug>/` folder:
 `designer` (brief→design) · `executor` (design→setup) · `feedback` (run→feedback + lessons). None call
-each other (ADR-003). A future `lessons-loop` closes the cycle by having `designer` read `lessons-learned/`.
+each other (ADR-003). The **`lessons-loop` closes the cycle**: `designer` reads `lessons-learned/` and
+applies relevant past lessons (matched by `practices` slug + `themes`) to new designs, citing them in
+`lessons_applied`. The hub now compounds — each debrief makes the next design smarter.

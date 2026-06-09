@@ -5,6 +5,7 @@ designed: <YYYY-MM-DD>
 total_min: <int>            # the target agenda total
 time_band: [<floor>, <ceiling>]
 grounding: <N>/<N>          # structures cited / structures that resolve to a practice
+lessons_applied: []         # files from lessons-learned/ that informed this design (omit/[] if none)
 reuse:                      # filled after running: as-is | minor | major | discarded
 ---
 
@@ -34,6 +35,11 @@ reuse:                      # filled after running: as-is | minor | major | disc
 
 ## Facilitator notes
 - <pre-work with conveners, swap-if-the-room alternatives, what to park, domination handling>
+
+## Lessons applied
+<!-- Only when past lessons informed this design. List which lesson and how it shaped the design.
+     Omit this whole section when no lessons were relevant. -->
+- <lesson file> → <how it changed this design — the swap/note/timing adjustment>
 
 ---
 **Grounding check:** <N>/<N> structures cite a practice file. ✅

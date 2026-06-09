@@ -51,6 +51,15 @@ jobs:
     story: >
       When I design a new workshop, I want the designer to surface relevant lessons from my past
       sessions, so I stop repeating mistakes and reuse what landed.
+    dimensions:
+      functional: While designing, recall lessons matching the candidate structures + context and let them shape the design.
+      emotional: Confidence I'm not repeating past mistakes; the tool feels like it knows my history.
+      social: Visibly improving — my designs carry hard-won experience, not just method.
+    forces:
+      push: I forget what I learned last time; the same mistakes recur; lessons sit unused in files.
+      pull: A designer that automatically recalls and applies the relevant past lessons, and shows which.
+      anxiety: Will it surface irrelevant noise or nag? Could an old lesson mislead a different context?
+      habit: Today I design fresh each time and only remember lessons by luck.
     importance: 4
     satisfaction: 1
     opportunity_score: 7
