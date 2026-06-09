@@ -48,6 +48,29 @@ in. The `facilitation-practices` skill and the `designer` pick it up automatical
 Seeded with [Liberating Structures](https://www.liberatingstructures.com/) and
 [Training from the BACK of the Room](https://bowperson.com/resources/index.html); add more anytime.
 
-## Roadmap
-Designer → Feedback capture → Lessons loop (designer learns from past sessions) → Executor (room / Miro /
-video prep) → Library growth. See `docs/product/vision.md`.
+## The agents
+Three assistants, each a stateless transform over a workshop folder (they compose via files, never call
+each other):
+- **`designer`** — brief → grounded, time-reconciled agenda; applies the TBR 4Cs + Six Trumps lens and
+  your past lessons.
+- **`executor`** — design → prep pack (in-person materials/setup, or a Miro+video recipe).
+- **`feedback`** — post-session brain-dump → structured `feedback.md` + reusable lessons tagged by
+  practice + theme. Those lessons feed back into the next design (the loop).
+
+See `docs/product/vision.md` for the full picture and `docs/product/architecture/brief.md` for the design.
+
+## Credits & sources
+The facilitation **methodologies** this toolkit draws on remain the work of their authors and keep their
+own terms. The practice files here are **original, attributed summaries with links — not reproductions**:
+- **Liberating Structures** — Henri Lipmanowicz & Keith McCandless, published under
+  [CC BY-NC-SA 3.0](https://creativecommons.org/licenses/by-nc-sa/3.0/) — https://www.liberatingstructures.com/
+- **Training from the BACK of the Room** — Sharon L. Bowman — https://bowperson.com/
+
+If you adapt or redistribute, keep these attributions and respect the source licenses. Note that
+Liberating Structures is **Non-Commercial ShareAlike** — that governs the LS *methods*, independent of
+this repo's MIT license. Not legal advice; check the source terms for your use case.
+
+## License
+LetPeopleWorkShop — the *toolkit* (agents, skill, templates, structure) — is released under the
+**MIT License** (see [`LICENSE`](LICENSE)). The underlying facilitation methodologies retain their own
+rights as noted above.
