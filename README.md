@@ -1,10 +1,15 @@
-# Facilitation Hub
+# LetPeopleWorkShop
+
+*Let people work(shop).* The [LetPeopleWork](https://letpeople.work) facilitation toolkit.
 
 A markdown-native, Claude-Code-native toolkit for designing, running, and learning from workshops.
-Bring a brief; grounded assistants help you **design** the session (and, soon, **prep** and **learn**
-from it). The repository *is* the tool — there's no app to install.
+Bring a brief; grounded assistants help you **design** the session, **prep** the room (or Miro/video),
+and **learn** from it afterwards — so the next one is better. The repository *is* the tool — there's no
+app to install.
 
-> **Status:** walking skeleton. The **designer** works end-to-end. Executor & feedback agents are next.
+> **Status:** the full loop works end-to-end — **designer** (applies your past lessons), **executor**
+> (in-person / digital prep packs), and **feedback** (debrief → tagged lessons), over a markdown
+> workshop archive and an extensible practices library.
 
 ## What's here
 ```

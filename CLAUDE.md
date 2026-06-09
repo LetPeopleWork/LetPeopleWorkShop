@@ -1,4 +1,4 @@
-# CLAUDE.md — Facilitation Hub
+# CLAUDE.md — LetPeopleWorkShop
 
 Guidance for Claude Code working in this repo. Keep this current; it's loaded every session.
 

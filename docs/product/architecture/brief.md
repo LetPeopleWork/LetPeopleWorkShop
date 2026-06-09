@@ -1,4 +1,4 @@
-# Architecture Brief — Facilitation Hub
+# Architecture Brief — LetPeopleWorkShop
 
 > SSOT for architecture. DESIGN wave (application scope, Morgan / nw-solution-architect).
 > Bootstrapped greenfield. Extend this file in future waves; do not recreate.
@@ -89,7 +89,7 @@ paradigm line written this wave.
 ```mermaid
 flowchart TB
     facilitator["👤 Facilitator<br/>(primary user)"]
-    subgraph hub["Facilitation Hub (this repo, run inside Claude Code)"]
+    subgraph hub["LetPeopleWorkShop (this repo, run inside Claude Code)"]
       tool["Toolkit + workshop archive<br/>markdown · agents · skill"]
     end
     ls["🌐 Liberating Structures<br/>(knowledge source, referenced)"]

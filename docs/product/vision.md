@@ -1,4 +1,4 @@
-# Product Vision — Facilitation Hub
+# Product Vision — LetPeopleWorkShop
 
 ## One-liner
 A personal, markdown-native **library + archive + planning hub** for facilitation: I bring a

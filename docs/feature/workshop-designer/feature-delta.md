@@ -1,6 +1,6 @@
 # Feature: workshop-designer
 
-> DISCUSS wave output (lean). This feature is the **walking skeleton** for the whole Facilitation Hub:
+> DISCUSS wave output (lean). This feature is the **walking skeleton** for the whole LetPeopleWorkShop:
 > the thinnest end-to-end path that delivers real value — a workshop brief becomes a grounded, timed agenda.
 
 ---

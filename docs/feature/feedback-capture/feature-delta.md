@@ -1,6 +1,6 @@
 # Feature: feedback-capture
 
-> DISCUSS wave output (lean). Second feature of the Facilitation Hub — the first half of the learning
+> DISCUSS wave output (lean). Second feature of the LetPeopleWorkShop — the first half of the learning
 > loop. Builds on the established `workshops/<slug>/` folder contract (ADR-003). Brownfield: no walking
 > skeleton; the folder + agent infrastructure already exist.
 
