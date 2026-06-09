@@ -1,5 +1,8 @@
 {
   "name": "letpeoplework",
+  "metadata": {
+    "description": "LetPeopleWork's facilitation tooling for Claude Code."
+  },
   "owner": {
     "name": "LetPeopleWork",
     "url": "https://letpeople.work"
