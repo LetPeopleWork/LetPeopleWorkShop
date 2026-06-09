@@ -56,10 +56,11 @@ structures onto. Recommend both as stance/structure-of-the-whole, never as an ag
 - **Facilitator's Guide to Participatory Decision-Making** (Sam Kaner et al., Community at Work) — https://communityatwork.com/
 - **The Art & Science of Facilitation** (Marsha Acker) / **structural dynamics** (David Kantor) — https://artandscienceoffacilitation.com/
 - **Innovation Games** (Luke Hohmann — *registered trademark*; techniques attributed, no branded materials) — https://www.lukehohmann.com/innovation-games
-- **Gamestorming** (Gray, Brown, Macanufo) — https://gamestorming.com/ (note: it catalogs others' methods — attribute to originals, e.g. pre-mortem = Gary Klein)
+- **Gamestorming** (Gray, Brown, Macanufo) — https://gamestorming.com/ (note: it catalogs others' methods — attribute to originals, e.g. pre-mortem = Gary Klein, empathy map = XPLANE)
+- **Agile Retrospectives** (Esther Derby & Diana Larsen) — https://pragprog.com/titles/dlret/agile-retrospectives/ (some activities predate the book — credit originals, e.g. temperature reading = Satir)
 
 ## Current practices
-The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're good for. Cite by slug.
+Grouped by what they're good for; cite by slug. Sources: **LS** = Liberating Structures · **TBR** = Training from the BACK of the Room · plus Kaner, Hohmann, Klein, Kantor/Acker, Gamestorming (XPLANE), Derby & Larsen.
 
 ### Openers & connection
 | Slug | Source | Good for |
@@ -69,6 +70,7 @@ The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're g
 | `nine-whys` | LS | Surfacing the shared deeper purpose of the work |
 | `appreciative-interviews` | LS | Mining success stories for what already works |
 | `conversation-cafe` | LS | Calm collective sense-making of a big/disturbing challenge |
+| `esvp` | Derby/Larsen | Anonymous read on engagement/buy-in toward the session |
 
 ### Diverge & surface input
 | Slug | Source | Good for |
@@ -77,6 +79,7 @@ The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're g
 | `25-10-crowd-sourcing` | LS | Crowd-ranking bold ideas fast (15+ people) |
 | `drawing-together` | LS | Surfacing insight words can't reach (visual) |
 | `social-network-webbing` | LS | Mapping who you really need to engage |
+| `empathy-map` | XPLANE | Stakeholder-perspective canvas (see/hear/say/do, think/feel) |
 
 ### Converge, decide & prioritize
 | Slug | Source | Good for |
@@ -86,6 +89,8 @@ The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're g
 | `agreement-certainty-matrix` | LS | Matching approach to problem type (simple…chaotic) |
 | `design-storyboards` | LS | Making a plan concrete and testable before committing |
 | `gradients-of-agreement` | Kaner | Testing the *strength* of support for a proposal — prevents false consensus |
+| `buy-a-feature` | Hohmann | Budget-constrained prioritization that forces real trade-offs |
+| `prune-the-product-tree` | Hohmann | Roadmap shaping via a tree — balance of where growth clusters |
 
 ### Charged topics & relationships
 | Slug | Source | Good for |
@@ -109,11 +114,16 @@ The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're g
 | `discovery-action-dialogue` | LS | Finding the group's own already-working behaviors (DAD) |
 | `simple-ethnography` | LS | Observing real behavior in the field |
 
-### Debrief, retro & sense-making
+### Retrospective, debrief & sense-making
 | Slug | Source | Good for |
 |------|--------|----------|
 | `what-so-what-now-what` | LS | Debrief; sense-making without premature solutions |
 | `speed-boat` | Hohmann | Retro: surfacing impediments via boat-and-anchors (depersonalized) |
+| `mad-sad-glad` | Derby/Larsen | Gathering *feelings* as data (retro Gather Data) |
+| `team-radar` | Derby/Larsen | Multi-factor self-assessment, repeatable as a progress measure |
+| `learning-matrix` | Derby/Larsen | Fast 4-quadrant insight capture (keep/change/idea/appreciate) |
+| `plus-delta` | Derby/Larsen | Minimal "improve the meeting" close (retro-on-the-retro) |
+| `roti` | Derby/Larsen | Was this session worth the time? 0–4 meta-evaluation (any meeting) |
 
 ### Strategy, foresight & big-picture
 | Slug | Source | Good for |
@@ -125,6 +135,7 @@ The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're g
 | `open-space-technology` | LS | Self-organizing marketplace for big complex challenges |
 | `remember-the-future` | Hohmann | Prospective-hindsight visioning ("imagine it worked — what did it do?") |
 | `pre-mortem` | Klein | Prospective risk: imagine it failed, surface why (before committing) |
+| `cover-story` | Gamestorming | Bold aspiration via a future magazine cover (past-tense visioning) |
 
 ### Lenses & frameworks (apply as stance/backbone, not agenda rows)
 | Slug | Source | Good for |
@@ -134,3 +145,4 @@ The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're g
 | `tbr-4cs` | TBR | *Framework*: session backbone — Connections → Concepts → Concrete Practice → Conclusions |
 | `participatory-decision-diamond` | Kaner | *Framework*: Divergent → Groan Zone → Convergent decision arc |
 | `four-player-model` | Kantor/Acker | *Lens*: read why a conversation is stuck (Move/Follow/Oppose/Bystand) |
+| `five-phase-retrospective` | Derby/Larsen | *Framework*: Stage → Data → Insights → Decide → Close (reflection arc) |
