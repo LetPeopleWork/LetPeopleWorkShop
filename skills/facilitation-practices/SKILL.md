@@ -53,6 +53,10 @@ structures onto. Recommend both as stance/structure-of-the-whole, never as an ag
 ## Sources seeded so far
 - **Liberating Structures** — https://www.liberatingstructures.com/ — the **full menu of 33** is included.
 - **Training from the BACK of the Room** (Sharon Bowman) — https://bowperson.com/resources/index.html
+- **Facilitator's Guide to Participatory Decision-Making** (Sam Kaner et al., Community at Work) — https://communityatwork.com/
+- **The Art & Science of Facilitation** (Marsha Acker) / **structural dynamics** (David Kantor) — https://artandscienceoffacilitation.com/
+- **Innovation Games** (Luke Hohmann — *registered trademark*; techniques attributed, no branded materials) — https://www.lukehohmann.com/innovation-games
+- **Gamestorming** (Gray, Brown, Macanufo) — https://gamestorming.com/ (note: it catalogs others' methods — attribute to originals, e.g. pre-mortem = Gary Klein)
 
 ## Current practices
 The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're good for. Cite by slug.
@@ -81,6 +85,7 @@ The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're g
 | `15-percent-solutions` | LS | Turning big problems into doable first steps + ownership |
 | `agreement-certainty-matrix` | LS | Matching approach to problem type (simple…chaotic) |
 | `design-storyboards` | LS | Making a plan concrete and testable before committing |
+| `gradients-of-agreement` | Kaner | Testing the *strength* of support for a proposal — prevents false consensus |
 
 ### Charged topics & relationships
 | Slug | Source | Good for |
@@ -104,12 +109,13 @@ The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're g
 | `discovery-action-dialogue` | LS | Finding the group's own already-working behaviors (DAD) |
 | `simple-ethnography` | LS | Observing real behavior in the field |
 
-### Debrief & sense-making
+### Debrief, retro & sense-making
 | Slug | Source | Good for |
 |------|--------|----------|
 | `what-so-what-now-what` | LS | Debrief; sense-making without premature solutions |
+| `speed-boat` | Hohmann | Retro: surfacing impediments via boat-and-anchors (depersonalized) |
 
-### Strategy, systems & big-picture
+### Strategy, foresight & big-picture
 | Slug | Source | Good for |
 |------|--------|----------|
 | `ecocycle-planning` | LS | Portfolio view: what to start, sustain, let go |
@@ -117,10 +123,14 @@ The 33 Liberating Structures + 3 TBR lenses/framework, grouped by what they're g
 | `panarchy` | LS | Seeing why change stalls across nested system levels |
 | `purpose-to-practice` | LS | Designing a resilient initiative (P2P, 5 elements) |
 | `open-space-technology` | LS | Self-organizing marketplace for big complex challenges |
+| `remember-the-future` | Hohmann | Prospective-hindsight visioning ("imagine it worked — what did it do?") |
+| `pre-mortem` | Klein | Prospective risk: imagine it failed, surface why (before committing) |
 
-### TBR lenses & framework (apply as stance, not agenda rows)
+### Lenses & frameworks (apply as stance/backbone, not agenda rows)
 | Slug | Source | Good for |
 |------|--------|----------|
 | `tbr-concrete-practice` | TBR | *Lens*: participants do the work, not the facilitator |
 | `tbr-brain-rules` | TBR | *Lens*: the Six Trumps (+ WIIFM, primacy-recency) — brain-friendly design |
 | `tbr-4cs` | TBR | *Framework*: session backbone — Connections → Concepts → Concrete Practice → Conclusions |
+| `participatory-decision-diamond` | Kaner | *Framework*: Divergent → Groan Zone → Convergent decision arc |
+| `four-player-model` | Kantor/Acker | *Lens*: read why a conversation is stuck (Move/Follow/Oppose/Bystand) |
