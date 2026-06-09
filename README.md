@@ -59,6 +59,11 @@ each other):
 
 See `docs/product/vision.md` for the full picture and `docs/product/architecture/brief.md` for the design.
 
+## Acknowledgments
+LetPeopleWorkShop grew out of a first prototype built together with
+**[Frank Barner](https://www.linkedin.com/in/frankbarner/)** — thank you, Frank, for the spark that
+inspired this.
+
 ## Credits & sources
 The facilitation **methodologies** this toolkit draws on remain the work of their authors and keep their
 own terms. The practice files here are **original, attributed summaries with links — not reproductions**:
