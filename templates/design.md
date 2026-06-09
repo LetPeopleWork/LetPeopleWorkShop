@@ -1,3 +1,13 @@
+---
+slug: <same slug as the brief>
+status: designed
+designed: <YYYY-MM-DD>
+total_min: <int>            # the target agenda total
+time_band: [<floor>, <ceiling>]
+grounding: <N>/<N>          # structures cited / structures that resolve to a practice
+reuse:                      # filled after running: as-is | minor | major | discarded
+---
+
 # Design — <workshop name>
 
 **Goal:** <one line from the brief> · **Medium:** <…> · **Group:** <…> · **Time box:** <…> · **This design:** <~total>

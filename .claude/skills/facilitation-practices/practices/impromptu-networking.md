@@ -1,6 +1,19 @@
+---
+slug: impromptu-networking
+name: Impromptu Networking
+type: structure
+source: liberating-structures
+source_url: https://www.liberatingstructures.com/4-impromptu-networking/
+mediums: [in-person, video]
+group_min: 5
+group_max: 100
+time_min: 10
+time_max: 15
+tags: [open, connect, equalize-voice]
+---
+
 # Impromptu Networking
 
-- **Source:** Liberating Structures — https://www.liberatingstructures.com/4-impromptu-networking/
 - **Purpose:** Rapidly engage everyone in voicing why they're here and surface lived experience; build connection and equal footing before harder work.
 - **When to use:** Opening a session; warming a group up; equalizing voice so quiet people are already "in" before the main work.
 - **Group config:** Pairs, standing, rotating partners each round.

@@ -1,3 +1,13 @@
+---
+slug: EXAMPLE-team-retro
+status: designed
+designed: 2026-06-09
+total_min: 75
+time_band: [60, 90]
+grounding: 3/3
+reuse:
+---
+
 # Design — Team retrospective (EXAMPLE)
 
 > Sanitized sample output of the `designer` agent. Shows the format a real `design.md` takes.

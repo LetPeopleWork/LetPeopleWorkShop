@@ -1,6 +1,19 @@
+---
+slug: wicked-questions
+name: Wicked Questions
+type: structure
+source: liberating-structures
+source_url: https://www.liberatingstructures.com/4-wicked-questions/
+mediums: [in-person, miro, video]
+group_min: 4
+group_max: 100
+time_min: 15
+time_max: 20
+tags: [paradox, strategy, hold-tension]
+---
+
 # Wicked Questions
 
-- **Source:** Liberating Structures — https://www.liberatingstructures.com/4-wicked-questions/
 - **Purpose:** Name a paradox the group must hold (two things that are both true and in tension) without resolving it prematurely — makes a hidden either/or discussable.
 - **When to use:** When a group is polarizing toward one "solution" and you want to surface the real tension instead. Strong alternative to TRIZ for this kind of session.
 - **Group config:** 1-2-4-All to draft and refine the paradox question.

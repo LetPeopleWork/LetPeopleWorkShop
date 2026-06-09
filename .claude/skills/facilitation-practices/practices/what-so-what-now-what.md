@@ -1,6 +1,19 @@
+---
+slug: what-so-what-now-what
+name: What, So What, Now What? (W³)
+type: structure
+source: liberating-structures
+source_url: https://www.liberatingstructures.com/9-what-so-what-now-what-w/
+mediums: [in-person, miro, video]
+group_min: 4
+group_max: 100
+time_min: 10
+time_max: 15
+tags: [debrief, sense-making, decide-next]
+---
+
 # What, So What, Now What? (W³)
 
-- **Source:** Liberating Structures — https://www.liberatingstructures.com/9-what-so-what-now-what-w/
 - **Purpose:** Make sense of an experience together by separating observation (What) from interpretation (So What) from action (Now What) — prevents jumping to conclusions/solutions too early.
 - **When to use:** Debriefing the session; converting surfaced problems into shared meaning and a small, non-threatening next step.
 - **Group config:** 1-2-4-All progression across the three questions.

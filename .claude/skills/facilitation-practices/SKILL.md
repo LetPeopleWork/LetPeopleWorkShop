@@ -23,12 +23,28 @@ so the library can move (e.g. into a packaged plugin) without rewriting any desi
 
 ## How to add a practice
 1. Copy `practices/_TEMPLATE.md` to `practices/<kebab-slug>.md`.
-2. Fill every field; `Medium fit` and `Facilitator notes` matter most.
-3. Done — no code change. The `designer` agent globs `practices/*.md` and picks it up.
+2. Fill the frontmatter (the index) and the prose body (the detail).
+3. Done — no code change. The `designer` agent and this skill glob `practices/*.md` and pick it up.
 
-## Practice file shape
-`name · source(+link) · purpose · when-to-use · group config · timing(+trim/expand) · medium fit
-(in-person/Miro/video) · steps · facilitator notes`
+## Practice file shape: frontmatter index + prose body
+Each practice is YAML frontmatter (machine-readable) followed by a markdown body (the rich detail).
+
+**Frontmatter fields:**
+`slug` (== filename) · `name` · `type` (`structure` | `principle`) · `source` · `source_url` ·
+`mediums` (subset of `in-person`/`miro`/`video`) · `group_min` / `group_max` · `time_min` / `time_max`
+(minutes; structures only) · `tags` (optional).
+
+**Body sections:** `Purpose · When to use · Group config · Timing · Medium fit (per-medium notes) ·
+Steps · Facilitator notes`.
+
+## Recommending practices (use the frontmatter)
+To recommend structures for a situation, filter on frontmatter first, then judge fit from the body:
+- **Medium** → `mediums` contains the session medium.
+- **Group size** → `group_min ≤ size ≤ group_max`.
+- **Time** → `time_min ≤ available slot`.
+- **Purpose** → match `tags` + the `Purpose`/`When to use` prose.
+A `type: principle` entry (e.g. `tbr-concrete-practice`) is a *lens* applied across the agenda, not a
+timed block — recommend it as a stance, never as an agenda row with a duration.
 
 ## Sources seeded so far
 - **Liberating Structures** — https://www.liberatingstructures.com/

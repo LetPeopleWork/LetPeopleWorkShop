@@ -125,3 +125,73 @@ None — greenfield. No DISCOVER/DIVERGE assumptions to reconcile.
 
 ## Wave: DISCUSS / [REF] Next wave
 Handoff to **DESIGN** (`/nw-design`) to settle: practices-library file schema, designer agent prompt/contract, `design.md` format, workshop folder convention. Alternatively run **`/nw-spike`** to PROBE the riskiest assumption (does a thin LS+TBR library ground a design I'd actually run?) and PROMOTE it into the walking skeleton. DEVOPS gets `outcome-kpis` only (lightweight here).
+
+---
+
+## Wave: DESIGN / [REF] DDD list (design decisions)
+- **[DD1] Style = ports-and-adapters, document-oriented.** Agents are stateless transformers over the library (read) and the workshop folder (read/write). No runtime, no compiled code. (`architecture/brief.md`)
+- **[DD2] Integration seam = `workshops/<slug>/` folder.** Agents compose by reading/writing files, never by calling each other. Lets executor/feedback land without touching designer. (ADR-003)
+- **[DD3] Practice format = frontmatter index + prose body.** Frontmatter is the machine index for recommendation/plugin-indexing; body holds the qualitative detail. (ADR-002)
+- **[DD4] Grounding by slug, agent-enforced.** Designs cite practices by slug resolving to `practices/<slug>.md`; validator deferred. (ADR-004)
+- **[DD5] Toolkit under `.claude/` = plugin payload.** (ADR-001 / D7)
+- **[DD6] Status lifecycle on the brief** (`draft→designed→run→archived`) makes the archive/hub queryable; designer advances `draft→designed`.
+
+## Wave: DESIGN / [REF] Component decomposition
+| Component | Path | Change |
+|---|---|---|
+| `designer` agent | `.claude/agents/designer.md` | EXTEND (frontmatter-aware, status lifecycle) |
+| `facilitation-practices` skill | `.claude/skills/facilitation-practices/SKILL.md` | EXTEND (schema + recommend section) |
+| practice files (×6) | `.claude/skills/facilitation-practices/practices/*.md` | EXTEND (frontmatter prepended) |
+| practice template | `…/practices/_TEMPLATE.md` | EXTEND (frontmatter schema) |
+| brief / design templates | `templates/{brief,design}.md` | EXTEND (frontmatter schema) |
+| workshop store | `workshops/<slug>/` | FORMALIZE (status field, file-name convention) |
+| architecture SSOT + ADRs | `docs/product/architecture/*` | CREATE NEW (greenfield) |
+
+## Wave: DESIGN / [REF] Driving ports
+- Invoke the `designer` subagent in Claude Code, pointed at `workshops/<slug>/brief.md`. (Future: `executor`, `feedback` — same pattern.)
+
+## Wave: DESIGN / [REF] Driven ports + adapters
+| Driven port | Adapter | Direction |
+|---|---|---|
+| Practices library | filesystem `Glob`/`Read` of `.claude/skills/facilitation-practices/practices/*.md` | read |
+| Brief | filesystem read `workshops/<slug>/brief.md` | read |
+| Design | filesystem write `workshops/<slug>/design.md` (+ set brief status) | write |
+| Lessons (future) | filesystem read `lessons-learned/*.md` | read |
+
+No network adapters. All local filesystem + git.
+
+## Wave: DESIGN / [REF] Technology choices
+- **Data:** Markdown + YAML frontmatter. **Agents:** Claude Code subagents. **Library:** Claude Code skill. **Versioning:** git (GitHub later). **Runtime/build:** none. **Paradigm:** N/A (no code); OOP default if a future linter is added.
+
+## Wave: DESIGN / [REF] Decisions table
+| ID | Decision |
+|---|---|
+| DD1 | Ports-and-adapters, document-oriented |
+| DD2 | Workshop folder = integration contract |
+| DD3 | Practice = frontmatter index + prose body |
+| DD4 | Grounding by slug, agent-enforced (validator deferred) |
+| DD5 | Toolkit under `.claude/` (plugin payload) |
+| DD6 | Status lifecycle on brief |
+
+## Wave: DESIGN / [REF] Reuse Analysis
+| Existing Component | File | Overlap | Decision | Justification |
+|---|---|---|---|---|
+| designer agent | `.claude/agents/designer.md` | brief→design orchestration | EXTEND | add frontmatter awareness + status (~12 lines) vs. a new agent |
+| facilitation-practices skill | `.claude/skills/.../SKILL.md` | library index/recommend | EXTEND | add schema + recommend section to existing skill |
+| practice files | `.claude/skills/.../practices/*.md` | structured metadata | EXTEND | prepend frontmatter; prose body unchanged |
+| brief/design templates | `templates/*.md` | schema | EXTEND | add frontmatter blocks |
+| workshop store | `workshops/<slug>/` | storage convention | EXTEND | add `status` field + file-name convention |
+| architecture SSOT | `docs/product/architecture/brief.md` | — | CREATE NEW | greenfield — no prior architecture doc exists |
+| ADRs 001–004 | `docs/product/architecture/adr-*.md` | — | CREATE NEW | first architectural decisions recorded |
+
+Zero unjustified CREATE NEW: the two CREATE NEW rows are greenfield SSOT artifacts with no prior equivalent.
+
+## Wave: DESIGN / [REF] Open questions (deferred)
+- **Grounding/schema validator** — build a tiny lint script (cited slug exists; frontmatter well-formed) or keep agent self-check? Deferred to DELIVER if drift appears (ADR-004).
+- **`CLAUDE.md` conventions file** — add one documenting repo-as-tool + schemas for future Claude Code sessions? Offered, not yet created.
+- **`lessons-learned/` schema** — defined later with the `feedback` / `lessons-loop` features.
+- **Project/repo name** — user-deferred; needed before GitHub remote.
+- **Plugin packaging** — deferred feature (ADR-001) once executor/feedback exist and the library shape settles.
+
+## Wave: DESIGN / [REF] Outcome Collision Check
+Skipped (correct): document/agent feature, no typed code-contract surface; `nwave-ai outcomes` CLI and registry belong to the framework repo, not this target project.

@@ -1,6 +1,16 @@
+---
+slug: tbr-concrete-practice
+name: Concrete Practice — participants do the work (TBR)
+type: principle          # a lens applied across the agenda, not a timed structure
+source: training-from-back-of-room
+source_url: https://bowperson.com/resources/index.html
+mediums: [in-person, miro, video]
+tags: [lens, participation, facilitator-stance, 4cs]
+---
+
 # Concrete Practice — participants do the work (TBR)
 
-- **Source:** Training from the BACK of the Room — https://bowperson.com/resources/index.html (Sharon Bowman). Core principle of the "4 Cs": Connections, Concepts, **Concrete Practice**, Conclusions; and "the person doing the most talking is doing the most learning."
+- **Source detail:** Sharon Bowman. Core principle of the "4 Cs": Connections, Concepts, **Concrete Practice**, Conclusions; and "the person doing the most talking is doing the most learning."
 - **Purpose:** Shift talking/thinking from the facilitator to the participants — the facilitator orchestrates, the group produces the content. Especially vital when the convener has a stake in the outcome.
 - **When to use:** Throughout. As a design *principle* for choosing and sequencing structures, not a single activity.
 - **Group config:** Whatever keeps participants active (pairs, small groups, walls).

@@ -1,6 +1,19 @@
+---
+slug: triz
+name: Making-Space-with-TRIZ
+type: structure
+source: liberating-structures
+source_url: https://www.liberatingstructures.com/6-making-space-with-triz/
+mediums: [in-person, miro, video]
+group_min: 4
+group_max: 100
+time_min: 12
+time_max: 20
+tags: [charged-topic, stop-doing, psychological-safety, energizer]
+---
+
 # Making-Space-with-TRIZ
 
-- **Source:** Liberating Structures — https://www.liberatingstructures.com/6-making-space-with-triz/
 - **Purpose:** Surface and let go of counterproductive things a group is *already doing*, by first imagining how to achieve the worst possible result — playful, depersonalizing, and safe for charged topics.
 - **When to use:** Spicy / defensive topics where direct criticism would trigger people; when you suspect the group is unknowingly sabotaging its own goal.
 - **Group config:** Whole group → small groups (1-2-4-All style) across three questions.
