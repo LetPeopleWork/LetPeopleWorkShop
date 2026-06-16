@@ -6,34 +6,27 @@
 you want to run, and a set of AI assistants help you **design** the agenda, **prepare** the room (or
 your Miro board / video call), and **learn** from how it went so your next workshop is better.
 
----
-
-## Pick your path
-
-| | **Path A — "I just want to use it"** | **Path B — "I'm comfortable with a terminal"** |
-|---|---|---|
-| Who | Facilitators, coaches, managers — no technical background needed | Developers, or anyone happy on a command line |
-| You use | The **Claude Code app** (point and type) | The **`claude` command** in your terminal (or an IDE extension) |
-| Jump to | [**Path A** ↓](#path-a--i-just-want-to-use-it) | [**Path B** ↓](#path-b--im-comfortable-with-a-terminal) |
-
-Both paths use the exact same toolkit and end up in the same place — they're just two ways in.
+You don't need to be technical to use it. If you can install an app and type a sentence, you can use
+this.
 
 ---
 
-## Path A — "I just want to use it"
+## What you need before you start
 
-You don't need to be technical. If you can install an app and type a sentence, you can use this.
-
-### What you need
-**Claude Code** — Anthropic's assistant. Get the app at
-[claude.com/claude-code](https://claude.com/claude-code) and sign in. That's the only thing to install.
+1. **Claude Code** — Anthropic's assistant that runs on your computer (or in the desktop app).
+   If you don't have it yet, get it at [claude.com/claude-code](https://claude.com/claude-code) and
+   sign in. That's the only thing you must install.
+2. That's it. There's no separate app for this toolkit, no setup, no coding.
 
 > **New to this?** Think of Claude Code as a chat window that can also read and write files in a folder
-> on your computer. This toolkit teaches it to be a workshop facilitator. You talk in plain English; it
-> does the work and saves the results as documents you can open and edit.
+> on your computer. This toolkit teaches it how to be a workshop facilitator. You talk to it in plain
+> English; it does the work and saves the results as documents you can open and edit.
 
-### Step 1 — Install the toolkit (one time)
-In Claude Code, type these two lines (one at a time):
+---
+
+## Step 1 — Install the toolkit (one time)
+
+Open Claude Code, and type these two lines (one at a time):
 
 ```
 /plugin marketplace add LetPeopleWork/LetPeopleWorkShop
@@ -43,88 +36,54 @@ In Claude Code, type these two lines (one at a time):
 - The **first** line tells Claude Code where to find the toolkit.
 - The **second** line installs it.
 
-That's the whole setup. The assistants are now available whenever you use Claude Code.
+That's the whole setup. The assistants are now available in any folder you work in.
 
-### Step 2 — Design your first workshop
+---
+
+## Step 2 — Design your first workshop
+
 Just ask, in plain English. For example, type:
 
 > **"Help me design a 90-minute retrospective for my team of 8, in person."**
 
-The **designer** assistant will create a short **brief** (a fill-in form), ask you a few questions
-(goal, group, length, in-person or remote, anything sensitive), and then write you a complete,
-time-checked **agenda** — which activities to run, in what order, how long each takes, and *why*.
+The **designer** assistant will:
+1. Create a short **brief** (a fill-in form) and ask you a few questions — your goal, the group, how
+   long, in person or remote, anything sensitive.
+2. Once it knows enough, write you a complete, time-checked **agenda** — which activities to run, in
+   what order, how long each takes, and *why* — using proven facilitation methods.
 
-### When the session is close
+You'll get a file you can read, edit, and bring into the room.
+
+### Then, when the session is close
+
 > **"Give me a prep pack for this workshop."**
 
-The **executor** assistant turns the agenda into a checklist: what to print or buy and how to set up
-the room — or, for online sessions, a step-by-step recipe for your Miro board and video call.
+The **executor** assistant turns the agenda into a checklist: what to print or buy, how to set up the
+room — or, for online sessions, a step-by-step recipe for your Miro board and video call.
 
-### Afterwards
-> **"Let's debrief the workshop — here's how it went: …"** *(then brain-dump what happened)*
+### And afterwards
 
-The **feedback** assistant turns your notes into a tidy summary **and** saves the lessons — so next time
-you design a similar session, those lessons are applied automatically. That's the loop that makes each
-workshop better than the last.
+> **"Let's debrief the workshop — here's how it went: …"** *(then just brain-dump what happened)*
 
----
+The **feedback** assistant turns your notes into a tidy summary **and** saves the lessons — so the next
+time you design a similar session, those lessons are automatically applied. That's the loop that makes
+each workshop better than the last.
 
-## Path B — "I'm comfortable with a terminal"
-
-Everything above works from the `claude` CLI too — plus a couple of extra ways to run it.
-
-### What you need
-Claude Code installed as a command-line tool. The official installer is at
-[claude.com/claude-code](https://claude.com/claude-code); a common route is npm:
-
-```bash
-npm install -g @anthropic-ai/claude-code   # check the official page for the current command
-claude            # launches the interactive session
-```
-
-### Option 1 — Install the published plugin (recommended)
-```bash
-claude plugin marketplace add LetPeopleWork/LetPeopleWorkShop
-claude plugin install let-people-workshop@letpeoplework
-```
-The same `/plugin …` slash commands from Path A also work *inside* an interactive `claude` session —
-the `claude plugin …` form just lets you do it from the shell (handy for scripting or setup).
-
-### Option 2 — Run it straight from a local clone (no install)
-Great for trying it, hacking on it, or pinning a specific version:
-```bash
-git clone https://github.com/LetPeopleWork/LetPeopleWorkShop.git
-cd LetPeopleWorkShop
-claude --plugin-dir .      # loads this repo as a plugin for that session
-```
-
-### Option 3 — One-shot / headless (scripts, CI, automation)
-Drive an assistant without an interactive session using print mode (`-p`):
-```bash
-claude --plugin-dir . -p "Use the designer to draft a 60-minute remote retro for a team of 6. \
-Scaffold the brief, state any assumptions, and write the design."
-```
-Add `--permission-mode acceptEdits` if you want it to write files without prompting.
-
-### Other ways in
-- **IDE extensions** — Claude Code runs in **VS Code** and **JetBrains** IDEs; install the plugin once
-  (Option 1) and the assistants are available there too.
-- **Desktop / web app** — that's Path A.
-
-### Try the included example
-A sanitized sample lives in `workshops/EXAMPLE-team-retro/` — a finished brief + agenda you can read,
-or point an assistant at to see the format.
+> **Want to see an example first?** Look in the `workshops/EXAMPLE-team-retro/` folder in this repo —
+> it shows what a finished brief and agenda look like.
 
 ---
 
-## What both paths share
+## Where do my workshops get saved?
 
-### Where do my workshops get saved?
-In **your own folder**, not inside the toolkit. When you design a workshop it's saved under
+In **your own folder**, not inside the toolkit. When you design a workshop, it's saved under
 `workshops/<your-workshop-name>/` in whatever folder you're working in. Your sessions, notes, and
 lessons are yours and stay with you.
 
-### The three assistants at a glance
+---
+
+## The three assistants at a glance
+
 | Assistant | You use it… | What it does |
 |---|---|---|
 | **designer** | before the session | brief → a grounded, time-checked agenda (and applies your past lessons) |
@@ -134,13 +93,17 @@ lessons are yours and stay with you.
 They work by reading and writing simple documents in your workshop folder — you can open and edit any
 of them at any time.
 
-### Add your own facilitation method
-The toolkit ships with a big library of facilitation structures (the full
-[Liberating Structures](https://www.liberatingstructures.com/) set, plus
-[Training from the BACK of the Room](https://bowperson.com/resources/index.html) and more). To add one:
+---
 
-1. Copy `skills/facilitation-practices/practices/_TEMPLATE.md` to a new file named after your method
-   (e.g. `world-cafe.md`).
+## Want to add your own facilitation method?
+
+The toolkit comes with a big library of facilitation structures (the full
+[Liberating Structures](https://www.liberatingstructures.com/) set, plus
+[Training from the BACK of the Room](https://bowperson.com/resources/index.html) and more). You can add
+your own:
+
+1. Copy the file `skills/facilitation-practices/practices/_TEMPLATE.md` to a new file named after your
+   method (e.g. `world-cafe.md`).
 2. Fill it in (the template tells you what goes where).
 
 The assistants pick it up automatically — no coding. **Important:** if the method comes from a book or a
@@ -152,10 +115,10 @@ own words, don't copy their worksheets, credit the author, and don't imply they 
 
 ## For developers
 
-The repo **is** the plugin — there's no build step. `claude --plugin-dir .` (Path B, Option 2) loads it
-for a session. Architecture, design decisions, and the product vision are in `docs/` (start with
-`docs/product/vision.md` and `docs/product/architecture/brief.md`). Contributor and maintenance notes
-are in [`CLAUDE.md`](CLAUDE.md).
+To hack on the toolkit locally, clone this repo and run `claude --plugin-dir .` — that loads the repo as
+a plugin without installing it. Architecture, design decisions, and the product vision are in `docs/`
+(start with `docs/product/vision.md` and `docs/product/architecture/brief.md`). Contributor and
+maintenance notes are in [`CLAUDE.md`](CLAUDE.md).
 
 ---
 
