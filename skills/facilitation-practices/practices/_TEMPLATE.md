@@ -10,6 +10,9 @@ group_max: <int>            # required for type: structure; omit for type: princ
 time_min: <int minutes>     # required for type: structure; omit for type: principle
 time_max: <int minutes>     # required for type: structure; omit for type: principle
 tags: [<freeform>, <e.g. diverge, debrief, charged-topic>]   # optional, aids recommendation
+rights_status: <cc-by-sa | original-method-attributed | trademarked>   # optional; default original-method-attributed. See NOTICE.md
+trademark: <e.g. "Innovation Games®">     # optional; only if the source name is a trademark
+attribution: <one-line credit, e.g. "Liberating Structures, CC BY-SA 4.0">   # optional; NOTICE.md holds the full record
 ---
 
 # <Practice Name>
@@ -34,4 +37,13 @@ The `designer` agent and `facilitation-practices` skill pick it up automatically
 - Frontmatter is the machine-readable INDEX (used to recommend/filter by medium, size, time).
 - The prose body is the DETAIL the designer leans on — keep `Medium fit` and `Facilitator notes` rich.
 - `slug` MUST equal the filename without `.md`; that's how designs cite the practice.
+
+THE FOUR GATES (keep the dual-license valid — see NOTICE.md). Every new practice must pass all four:
+  1. Original expression only — your own words and this schema, never copied/close-paraphrased text.
+  2. No protected instruments — don't reproduce a source's worksheet, diagram, assessment, or exact
+     question sequence. Describe the PROCESS. If it can't be described without copying the instrument,
+     it does not go in.
+  3. Attribute the originator — fill `source` + `source_url` and a credit line in the body.
+  4. Disclaim affiliation + acknowledge trademark — add a row to NOTICE.md; set `trademark`/`attribution`
+     above if relevant. The standing disclaimer in NOTICE.md covers endorsement.
 -->

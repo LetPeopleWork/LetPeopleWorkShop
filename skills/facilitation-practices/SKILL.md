@@ -50,9 +50,16 @@ A `type: principle` entry (e.g. `tbr-concrete-practice`, `tbr-brain-rules`) is a
 agenda, not a timed block. A `type: framework` entry (e.g. `tbr-4cs`) is a *backbone* you sequence
 structures onto. Recommend both as stance/structure-of-the-whole, never as an agenda row with a duration.
 
-## Sources seeded so far
-- **Liberating Structures** — https://www.liberatingstructures.com/ — the **full menu of 33** is included.
-- **Training from the BACK of the Room** (Sharon Bowman) — https://bowperson.com/resources/index.html
+## Sources, attribution & rights
+Every practice file is an **original, attributed summary** — our own words describing a method, never a
+reproduction of the source's text or materials. Full per-source attribution and rights status live in
+[`NOTICE.md`](../../NOTICE.md); practice *content* is licensed CC BY-SA 4.0 (see `LICENSE-CONTENT`).
+Underlying methods, names, and trademarks belong to their originators; inclusion is descriptive and
+implies **no affiliation or endorsement**. When adding a method, follow the **four gates** in `NOTICE.md`.
+
+### Sources seeded so far
+- **Liberating Structures** — Lipmanowicz & McCandless (2013); *Fieldbook* (2026) McCandless & White — **CC BY-SA 4.0** — https://www.liberatingstructures.com/ — the **full menu of 33** is included.
+- **Training from the BACK of the Room** (Sharon Bowman) — *all rights reserved; not affiliated/endorsed; "Training from the BACK of the Room"™* — https://bowperson.com/resources/index.html
 - **Facilitator's Guide to Participatory Decision-Making** (Sam Kaner et al., Community at Work) — https://communityatwork.com/
 - **The Art & Science of Facilitation** (Marsha Acker) / **structural dynamics** (David Kantor) — https://artandscienceoffacilitation.com/
 - **Innovation Games** (Luke Hohmann — *registered trademark*; techniques attributed, no branded materials) — https://www.lukehohmann.com/innovation-games

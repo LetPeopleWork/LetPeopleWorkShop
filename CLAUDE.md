@@ -53,8 +53,24 @@ shared folder. Full detail + C4 diagrams: `docs/product/architecture/brief.md` a
 - **Setup / Feedback / Lesson** — `templates/{setup,feedback,lesson}.md`.
 
 ## Extending
-- **Add a practice:** copy `skills/facilitation-practices/practices/_TEMPLATE.md` → `<slug>.md`, fill frontmatter + body. No code change.
+- **Add a practice:** copy `skills/facilitation-practices/practices/_TEMPLATE.md` → `<slug>.md`, fill frontmatter + body. No code change. **Must pass the four gates** (see below + `NOTICE.md`).
 - **Add an agent:** drop a file in `agents/`. It composes via the `workshops/<slug>/` folder; reference bundled toolkit files via `${CLAUDE_PLUGIN_ROOT}`.
+
+## Licensing & the rights layer (hold this)
+Dual-licensed: **MIT** for the toolkit (agents, templates, skill plumbing, docs — see `LICENSE`) and
+**CC BY-SA 4.0** for the practice *content* (`skills/facilitation-practices/practices/*.md` — see
+`LICENSE-CONTENT`). `plugin.json` declares `MIT AND CC-BY-SA-4.0`. The per-source rights registry is
+[`NOTICE.md`](NOTICE.md) — keep it current when adding a source.
+
+**The four gates — every new method (added by a human OR the `designer`) must pass all four:**
+1. **Original expression only** — our words and our schema; never copy/close-paraphrase the source text.
+2. **No protected instruments** — never reproduce a source's worksheet, diagram, assessment, or exact
+   question sequence. Describe the *process*. If it can't be described without copying the instrument,
+   it does not go in.
+3. **Attribute the originator** — `source` + `source_url` + a body credit line.
+4. **Disclaim affiliation + acknowledge trademark** — add a `NOTICE.md` row; set frontmatter
+   `rights_status`/`trademark`/`attribution` where relevant. The standing `NOTICE.md` disclaimer covers
+   endorsement. This is what keeps the dual-license valid for *any* source, however commercially protected.
 
 ## Distribution
 The repo IS the plugin (ADR-007). Submit once to the community marketplace

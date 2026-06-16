@@ -1,0 +1,46 @@
+Creative Commons Attribution-ShareAlike 4.0 International (CC BY-SA 4.0)
+=======================================================================
+
+SCOPE
+-----
+This license applies to the FACILITATION PRACTICE CONTENT in this repository —
+specifically the original descriptive texts in:
+
+    skills/facilitation-practices/practices/*.md
+
+It does NOT apply to the rest of the repository (agents, templates, skill
+plumbing, docs, manifest), which is licensed under the MIT License — see the
+LICENSE file. See README.md ("License") and NOTICE.md for the full picture.
+
+WHAT THIS COVERS
+----------------
+The practice files are ORIGINAL summaries written by LetPeopleWork. They
+describe facilitation *methods* (which are not themselves copyrightable) in our
+own words and structure. Copyright in this descriptive text is held by
+LetPeopleWork and released under CC BY-SA 4.0.
+
+The underlying methods, names, and any trademarks remain the property of their
+respective originators and are credited in NOTICE.md. This license governs OUR
+text only — it grants no rights in the underlying methodologies, brands, or any
+third party's materials.
+
+THE LICENSE
+-----------
+You are free to share and adapt this content for any purpose, including
+commercially, under these terms:
+
+  - Attribution — give appropriate credit (see NOTICE.md), link to the license,
+    and indicate if changes were made.
+  - ShareAlike — if you remix or build upon this content, you must distribute
+    your contributions under this same CC BY-SA 4.0 license.
+  - No additional restrictions.
+
+Full legal text: https://creativecommons.org/licenses/by-sa/4.0/legalcode
+Human-readable summary: https://creativecommons.org/licenses/by-sa/4.0/
+
+ATTRIBUTION FOR THIS CONTENT
+----------------------------
+"Facilitation practice summaries from LetPeopleWorkShop by LetPeopleWork
+(https://github.com/LetPeopleWork/LetPeopleWorkShop), licensed under CC BY-SA 4.0."
+
+Plus the source attributions in NOTICE.md for any specific practices you reuse.

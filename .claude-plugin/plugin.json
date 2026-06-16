@@ -4,6 +4,6 @@
   "author": { "name": "LetPeopleWork", "url": "https://letpeople.work" },
   "homepage": "https://github.com/LetPeopleWork/LetPeopleWorkShop",
   "repository": "https://github.com/LetPeopleWork/LetPeopleWorkShop",
-  "license": "MIT",
+  "license": "MIT AND CC-BY-SA-4.0",
   "keywords": ["facilitation", "workshops", "liberating-structures", "training-from-the-back-of-the-room", "claude-code"]
 }
