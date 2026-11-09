@@ -17,3 +17,6 @@
 # Editor / OS noise
 .DS_Store
 *.swp
+# nWave config (keep .nwave/config.json trackable)
+.nwave/*
+!.nwave/config.json
